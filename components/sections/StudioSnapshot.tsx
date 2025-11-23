@@ -17,20 +17,25 @@ import {
   ArrowRight
 } from "lucide-react";
 
+import { getAllTeamMembers } from "@/lib/teams";
+
 const team = [
   {
+    slug: "judy-chesire",
     name: "Judy Chesire",
     role: "Principal Architect",
     image: "/mockdata/team/Judy Chesire.jpg",
     credentials: "B.Arch , Project Manager "
   },
   {
+    slug: "kevin-yegon",
     name: "Kevin Yegon",
     role: "Design Director",
     image: "/mockdata/team/Kevin Yegon.png",
     credentials: "B.Arch, BIM Specialist"
   },
   {
+    slug: "kimwetich-weldon",
     name: "Kimwetich Weldon",
     role: "Project Manager",
     image: "/mockdata/team/Kimwetich Weldon.png",
@@ -161,21 +166,23 @@ export function StudioSnapshot() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
-                    <Card className="border-0 shadow-sm bg-card/50 backdrop-blur-sm">
-                      <CardContent className="p-4">
-                        <div className="flex items-center space-x-4">
-                          <Avatar className="w-12 h-12">
-                            <AvatarImage src={member.image} alt={member.name} />
-                            <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-sm">{member.name}</h4>
-                            <p className="text-xs text-muted-foreground">{member.role}</p>
-                            <p className="text-xs text-primary font-medium">{member.credentials}</p>
+                    <Link href={`/team/${member.slug}`} className="block group">
+                      <Card className="border-0 shadow-sm bg-card/50 backdrop-blur-sm hover:bg-card/70 transition-colors cursor-pointer">
+                        <CardContent className="p-4">
+                          <div className="flex items-center space-x-4">
+                            <Avatar className="w-12 h-12">
+                              <AvatarImage src={member.image} alt={member.name} />
+                              <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1">
+                              <h4 className="font-semibold text-sm group-hover:text-primary transition-colors">{member.name}</h4>
+                              <p className="text-xs text-muted-foreground">{member.role}</p>
+                              <p className="text-xs text-primary font-medium">{member.credentials}</p>
+                            </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
