@@ -1,22 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { LayerLoader } from "@/components/loader/LayerLoader";
 import { NavBar } from "@/components/layout/NavBar";
-import { Hero } from "@/components/sections/Hero";
-import { Philosophy } from "@/components/sections/Philosophy";
+import { LayerLoader } from "@/components/loader/LayerLoader";
 import { LineSweep } from "@/components/motion/LineSweep";
+import { Hero } from "@/components/sections/Hero";
 import { Badge } from "@/components/ui/badge";
-import { MapPin } from "lucide-react";
 import { getAllProjects } from "@/lib/projects";
+import { MapPin } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
+import { Footer } from "@/components/layout/Footer";
+import { ContactCTA } from "@/components/sections/ContactCTA";
 import { Process } from "@/components/sections/Process";
-import { Services } from "@/components/sections/Services";
 import { StudioSnapshot } from "@/components/sections/StudioSnapshot";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { ContactCTA } from "@/components/sections/ContactCTA";
-import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
@@ -31,7 +29,7 @@ export default function Home() {
       if (showLoader) {
         setShowLoader(false);
       }
-    }, 2000);
+    }, 100000);
 
     return () => clearTimeout(timer);
   }, [showLoader]);

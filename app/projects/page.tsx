@@ -16,7 +16,8 @@ const categoryColors = {
   Healthcare: "bg-blue-500/10 text-blue-700 border-blue-200",
   Residential: "bg-green-500/10 text-green-700 border-green-200",
   Commercial: "bg-purple-500/10 text-purple-700 border-purple-200",
-  Cultural: "bg-orange-500/10 text-orange-700 border-orange-200"
+  Cultural: "bg-orange-500/10 text-orange-700 border-orange-200",
+  "Mixed-Use": "bg-indigo-500/10 text-indigo-700 border-indigo-200"
 };
 
 export default function ProjectsPage() {
@@ -155,19 +156,19 @@ export default function ProjectsPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-primary mb-2">285K</div>
+                <div className="text-4xl font-bold text-primary mb-2">435K</div>
                 <div className="text-sm text-muted-foreground">Sq Ft Designed</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-primary mb-2">4</div>
-                <div className="text-sm text-muted-foreground">Projects Completed</div>
+                <div className="text-4xl font-bold text-primary mb-2">5</div>
+                <div className="text-sm text-muted-foreground">Total Projects</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-primary mb-2">95%</div>
+                <div className="text-4xl font-bold text-primary mb-2">98%</div>
                 <div className="text-sm text-muted-foreground">Client Satisfaction</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-primary mb-2">2</div>
+                <div className="text-4xl font-bold text-primary mb-2">3</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </div>
             </div>

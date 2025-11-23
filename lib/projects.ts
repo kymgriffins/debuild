@@ -122,6 +122,38 @@ export const projects: Record<string, ProjectData> = {
       "Performance Spaces",
       "Cultural Heritage"
     ]
+  },
+  "katani": {
+    id: 5,
+    title: "Katani Mixed-Use Development",
+    slug: "katani",
+    category: "Mixed-Use",
+    description: "Innovative mixed-use development combining residential, commercial, and community spaces in Nairobi's dynamic Katani area.",
+    longDescription: "The Katani Mixed-Use Development represents a visionary approach to urban living in Nairobi's rapidly evolving landscape. This comprehensive project integrates residential apartments, retail spaces, and community facilities into a cohesive, pedestrian-friendly environment. The architectural design embraces sustainable building practices with green roofs, rainwater harvesting, and energy-efficient systems that reduce environmental impact while providing modern, comfortable living spaces. The development includes rooftop gardens, communal spaces, and local business opportunities that strengthen community bonds and support local economic growth. This project exemplifies how thoughtful urban planning can create vibrant, sustainable neighborhoods that meet the needs of contemporary Kenyan families.",
+    images: [
+      "/mockdata/katani/01-exterior-overview.jpeg",
+      "/mockdata/katani/02-retail-facade.jpeg",
+      "/mockdata/katani/03-residential-units.jpeg",
+      "/mockdata/katani/04-community-spaces.jpeg",
+      "/mockdata/katani/05-rooftop-gardens.jpeg",
+      "/mockdata/katani/06-landscape-design.jpeg",
+      "/mockdata/katani/07-staircase-detail.jpeg",
+      "/mockdata/katani/08-facade-illumination.jpeg",
+      "/mockdata/katani/09-entrance-communal.jpeg",
+      "/mockdata/katani/10-modern-interior.jpeg"
+    ],
+    year: "2025",
+    location: "Katani, Nairobi, Kenya",
+    size: "150,000 sq ft",
+    status: "Under Construction",
+    features: [
+      "Mixed-Use Development",
+      "Sustainable Design",
+      "Rooftop Gardens",
+      "Community Spaces",
+      "Energy-Efficient Systems",
+      "Local Business Integration"
+    ]
   }
 };
 
