@@ -9,12 +9,15 @@ import { Badge } from "@/components/ui/badge";
 import { getAllTeamMembers } from "@/lib/teams";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { LineSweep } from "@/components/motion/LineSweep";
+import { NavBar } from "@/components/layout/NavBar";
 
 export default function TeamPage() {
   const teamMembers = getAllTeamMembers();
 
   return (
     <div className="min-h-screen">
+      <NavBar />
+
       {/* Hero Section */}
       <section className="relative py-24 lg:py-32 bg-gradient-to-br from-primary/5 via-background to-primary/10">
         <div className="container mx-auto px-6 lg:px-20">
