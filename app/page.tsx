@@ -7,6 +7,10 @@ import { Hero } from "@/components/sections/Hero";
 import { Philosophy } from "@/components/sections/Philosophy";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Process } from "@/components/sections/Process";
+import { Services } from "@/components/sections/Services";
+import { StudioSnapshot } from "@/components/sections/StudioSnapshot";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { ContactCTA } from "@/components/sections/ContactCTA";
 import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
@@ -40,14 +44,13 @@ export default function Home() {
             <Philosophy />
             <FeaturedProjects />
             <Process />
+            <Services />
+            <Testimonials />
+            <StudioSnapshot />
+            <ContactCTA />
           </main>
 
           <Footer />
-
-          {/* Placeholder for remaining sections */}
-          {/* Services Grid */}
-          {/* Contact CTA */}
-          {/* Footer will go here */}
         </div>
       )}
     </>

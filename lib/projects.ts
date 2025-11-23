@@ -30,7 +30,7 @@ export const projects: Record<string, ProjectData> = {
       "/mockdata/Kijabe/003.png",
       "/mockdata/Kijabe/004.png",
       "/mockdata/Kijabe/005.png",
-      "/mockdata/Kijabe/me.png"
+
     ],
     year: "2024",
     location: "Kijabe, Kenya",

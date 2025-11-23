@@ -8,9 +8,9 @@ const processSteps = [
     id: 1,
     name: "Discovery & Research",
     description: "Deep dive into site conditions, client needs, and contextual analysis.",
-    color: "from-gray-100/10 via-gray-200/10 to-gray-300/10",
-    borderColor: "border-white/20",
-    glowColor: "rgba(255, 255, 255, 0.1)",
+    color: "from-blue-50 via-white to-gray-50",
+    borderColor: "border-gray-200",
+    glowColor: "rgba(59, 130, 246, 0.1)",
     icon: "🔍",
     details: [
       "User research & stakeholder interviews",
@@ -24,9 +24,9 @@ const processSteps = [
     id: 2,
     name: "Concept Development",
     description: "Synthesis of research into architectural concepts that balance form, function, and site integration.",
-    color: "from-gray-200/10 via-gray-300/10 to-gray-400/10",
-    borderColor: "border-white/25",
-    glowColor: "rgba(255, 255, 255, 0.15)",
+    color: "from-blue-100 via-white to-gray-50",
+    borderColor: "border-gray-300",
+    glowColor: "rgba(59, 130, 246, 0.15)",
     icon: "💡",
     details: [
       "Preliminary sketches & massing studies",
@@ -40,9 +40,9 @@ const processSteps = [
     id: 3,
     name: "Design Iteration",
     description: "Refinement through collaborative review, technical coordination, and performance optimization.",
-    color: "from-gray-300/10 via-gray-400/10 to-gray-500/10",
-    borderColor: "border-white/30",
-    glowColor: "rgba(255, 255, 255, 0.2)",
+    color: "from-blue-200 via-white to-gray-100",
+    borderColor: "border-gray-400",
+    glowColor: "rgba(59, 130, 246, 0.2)",
     icon: "🔄",
     details: [
       "Design development & 3D modeling",
@@ -56,9 +56,9 @@ const processSteps = [
     id: 4,
     name: "Technical Detailing",
     description: "Comprehensive documentation ensuring constructability, compliance, and quality execution.",
-    color: "from-gray-400/10 via-gray-500/10 to-gray-600/10",
-    borderColor: "border-white/35",
-    glowColor: "rgba(255, 255, 255, 0.25)",
+    color: "from-blue-300 via-white to-gray-200",
+    borderColor: "border-gray-500",
+    glowColor: "rgba(59, 130, 246, 0.25)",
     icon: "📐",
     details: [
       "Construction document preparation",
@@ -72,9 +72,9 @@ const processSteps = [
     id: 5,
     name: "Project Delivery",
     description: "Seamless project handover with comprehensive support for successful implementation.",
-    color: "from-gray-500/10 via-gray-600/10 to-gray-700/10",
-    borderColor: "border-white/40",
-    glowColor: "rgba(255, 255, 255, 0.3)",
+    color: "from-blue-400 via-white to-gray-300",
+    borderColor: "border-gray-600",
+    glowColor: "rgba(59, 130, 246, 0.3)",
     icon: "🚀",
     details: [
       "Construction administration",
@@ -114,7 +114,7 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
       {/* Connection Line */}
       {index < totalSteps - 1 && (
         <motion.div
-          className="absolute left-1/2 top-full w-0.5 h-24 bg-gradient-to-b from-white/20 to-transparent z-0"
+          className="absolute left-1/2 top-full w-0.5 h-24 bg-gradient-to-b from-gray-300 to-transparent z-0"
           initial={{ scaleY: 0, opacity: 0 }}
           animate={isInView ? { scaleY: 1, opacity: 1 } : { scaleY: 0, opacity: 0 }}
           transition={{ delay: index * 0.2 + 0.5, duration: 0.6 }}
@@ -123,7 +123,7 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
 
       {/* Main Card */}
       <motion.div
-        className="relative bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl overflow-hidden"
+        className="relative bg-white backdrop-blur-xl border border-gray-200 rounded-3xl p-8 shadow-lg overflow-hidden"
         whileHover={{
           scale: 1.02,
           y: -5,
@@ -132,7 +132,7 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
         style={{
           boxShadow: isHovered
             ? `0 25px 50px -12px ${step.glowColor}`
-            : '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+            : '0 10px 40px -10px rgba(0, 0, 0, 0.1)'
         }}
       >
         {/* Animated Background Gradient */}
@@ -160,7 +160,7 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
         >
           <div className="flex items-center gap-4">
             <motion.div
-              className="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-white font-light text-lg shadow-lg"
+              className="w-12 h-12 rounded-2xl bg-gradient-to-br from-gray-100 to-white border border-gray-300 flex items-center justify-center text-gray-700 font-light text-lg shadow-sm"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
             >
@@ -178,7 +178,7 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
           </div>
 
           <motion.span
-            className="text-xs text-gray-300 bg-white/5 px-3 py-1 rounded-full border border-white/10"
+            className="text-xs text-gray-600 bg-gray-100 px-3 py-1 rounded-full border border-gray-300"
             animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
           >
             {step.duration}
@@ -188,7 +188,7 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
         {/* Content */}
         <div className="relative z-10">
           <motion.h3
-            className="text-2xl font-light text-white mb-3 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent"
+            className="text-2xl font-light text-gray-800 mb-3"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: index * 0.2 + 0.4 }}
@@ -197,7 +197,7 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
           </motion.h3>
 
           <motion.p
-            className="text-gray-300 leading-relaxed mb-6 text-lg"
+            className="text-gray-600 leading-relaxed mb-6 text-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: index * 0.2 + 0.5 }}
@@ -215,13 +215,13 @@ function ProcessStep({ step, index, totalSteps }: { step: typeof processSteps[0]
             {step.details.map((detail, detailIndex) => (
               <motion.li
                 key={detailIndex}
-                className="flex items-center text-sm text-gray-400"
+                className="flex items-center text-sm text-gray-500"
                 initial={{ opacity: 0, x: -10 }}
                 animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                 transition={{ delay: detailIndex * 0.1 }}
               >
                 <motion.div
-                  className="w-1.5 h-1.5 rounded-full bg-current mr-3"
+                  className="w-1.5 h-1.5 rounded-full bg-blue-400 mr-3"
                   animate={isHovered ? { scale: [1, 1.5, 1] } : { scale: 1 }}
                   transition={{ duration: 0.6, delay: detailIndex * 0.1 }}
                 />
@@ -269,16 +269,16 @@ export function Process() {
     <section
       ref={sectionRef}
       id="process"
-      className="relative py-32 lg:py-48 bg-black from-black via-gray-900 to-black overflow-hidden"
+      className="relative py-32 lg:py-48 bg-white overflow-hidden"
     >
-      {/* Animated Background Elements */}
+      {/* Subtle Background Elements */}
       <motion.div
-        className="absolute inset-0 opacity-40"
+        className="absolute inset-0 opacity-30"
         style={{ opacity: backgroundOpacity }}
       >
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse delay-500" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-50 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-50 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-blue-50 rounded-full blur-3xl animate-pulse delay-500" />
       </motion.div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -292,14 +292,14 @@ export function Process() {
         >
           {/* Premium Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-white/10 to-white/5 border border-white/10 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center gap-2 bg-gray-100 border border-gray-300 rounded-full px-6 py-3 mb-8"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, type: "spring" }}
             viewport={{ once: true }}
           >
-            <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-            <span className="text-sm font-medium text-gray-300">Design Process</span>
+            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-gray-700">Design Process</span>
           </motion.div>
 
           {/* Main Heading */}
@@ -310,18 +310,18 @@ export function Process() {
             transition={{ delay: 0.3, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <span className="bg-gradient-to-r from-white via-gray-100 to-gray-200 bg-clip-text text-transparent">
+            <span className="text-gray-900">
               Our Creative
             </span>
             <br />
-            <span className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent">
+            <span className="text-gray-700">
               Process
             </span>
           </motion.h2>
 
           {/* Description */}
           <motion.p
-            className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto"
+            className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -356,7 +356,7 @@ export function Process() {
           viewport={{ once: true }}
         >
           <motion.p
-            className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8"
+            className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.6 }}
@@ -367,14 +367,14 @@ export function Process() {
           </motion.p>
 
           <motion.button
-            className="group relative bg-gradient-to-r from-white/10 to-white/5 text-white px-8 py-4 rounded-2xl font-medium overflow-hidden border border-white/10"
+            className="group relative bg-white text-gray-800 px-8 py-4 rounded-2xl font-medium overflow-hidden border border-gray-300 shadow-sm hover:shadow-md transition-shadow"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="relative z-10 flex items-center gap-3">
               Start Your Project
               <motion.svg
-                className="w-5 h-5 group-hover:translate-x-1"
+                className="w-5 h-5 group-hover:translate-x-1 text-blue-500"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -390,7 +390,7 @@ export function Process() {
 
             {/* Button Shine Effect */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-50 to-transparent skew-x-12"
               initial={{ x: "-100%" }}
               whileHover={{ x: "200%" }}
               transition={{ duration: 0.8 }}
