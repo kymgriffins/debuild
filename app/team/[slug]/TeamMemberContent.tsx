@@ -1,395 +1,395 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import { use } from "react";
-import { notFound } from "next/navigation";
-import { LineSweep } from "@/components/motion/LineSweep";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
+  Award,
+  Calendar,
   Mail,
   Phone,
-  ExternalLink,
-  Award,
-  BookOpen,
-  Calendar,
-  Users,
-  MapPin,
   ArrowLeft,
-  Download,
-  Share2,
   Linkedin,
-  Building2,
+  GraduationCap,
+  Target,
+  Zap,
+  MapPin,
   Quote
 } from "lucide-react";
-import { getTeamMemberBySlug } from "@/lib/teams";
+import { getTeamMemberBySlug, type TeamMemberData } from "@/lib/teams";
+import { cn } from "@/lib/utils";
+import { LineSweep } from "@/components/motion/LineSweep";
 
 interface TeamMemberContentProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  member: TeamMemberData;
+  isLoading?: boolean;
+  error?: string | null;
+  className?: string;
 }
 
-export function TeamMemberContent({ params }: TeamMemberContentProps) {
-  const resolvedParams = use(params);
-  const teamMember = getTeamMemberBySlug(resolvedParams.slug);
-
-  if (!teamMember) {
-    notFound();
-  }
-
+// Skeleton loader for better UX
+export function TeamMemberContentSkeleton() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 bg-gradient-to-br from-primary/5 via-background to-primary/10">
+    <div className="min-h-screen bg-white">
+      <div className="pt-8">
         <div className="container mx-auto px-6 lg:px-20">
-          {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <Button variant="outline" size="sm" className="px-4" asChild>
-              <Link href="/meet-our-team">
+          <Skeleton className="h-10 w-32 mb-8" />
+        </div>
+      </div>
+
+      <section className="relative h-96 bg-gray-200">
+        <Skeleton className="absolute inset-0" />
+      </section>
+
+      <div className="max-w-6xl mx-auto px-4 py-12 space-y-12">
+        {[...Array(6)].map((_, i) => (
+          <div key={i}>
+            <Skeleton className="h-8 w-48 mb-6" />
+            <Skeleton className="h-4 w-full mb-2" />
+            <Skeleton className="h-4 w-3/4" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Error state component
+function TeamMemberError({ error, onRetry }: { error: string; onRetry?: () => void }) {
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <Card className="w-full max-w-md mx-4">
+        <CardContent className="pt-6 text-center">
+          <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+            <Award className="w-8 h-8 text-red-600" />
+          </div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            Unable to Load Profile
+          </h2>
+          <p className="text-gray-600 mb-6">{error}</p>
+          <div className="flex gap-3 justify-center">
+            <Button asChild variant="outline">
+              <Link href="/team">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Team
               </Link>
             </Button>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Image Column */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="relative">
-                <div className="aspect-[3/4] relative rounded-2xl overflow-hidden bg-muted">
-                  <Image
-                    src={teamMember.image}
-                    alt={teamMember.name}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </div>
-
-                {/* Role Badge */}
-                <div className="absolute -bottom-6 -right-6">
-                  <div className="bg-card rounded-xl p-4 shadow-xl border">
-                    <div className="text-sm font-medium text-primary">{teamMember.role}</div>
-                    <div className="flex items-center space-x-2 text-xs text-muted-foreground mt-1">
-                      <Calendar className="w-3 h-3" />
-                      <span>{teamMember.experience}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Content Column */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-6"
-            >
-              <div>
-                <h1 className="text-4xl lg:text-5xl font-light tracking-tight mb-2">
-                  {teamMember.name}
-                </h1>
-                <p className="text-primary font-medium text-xl">{teamMember.role}</p>
-                <p className="text-primary text-sm font-medium">{teamMember.credentials}</p>
-              </div>
-
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                {teamMember.bio}
-              </p>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 py-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{teamMember.experience_years}</div>
-                  <div className="text-xs text-muted-foreground">Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{teamMember.projects_completed}</div>
-                  <div className="text-xs text-muted-foreground">Projects Completed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{teamMember.awards.length}</div>
-                  <div className="text-xs text-muted-foreground">Awards Won</div>
-                </div>
-              </div>
-
-              {/* Contact & Social */}
-              <div className="space-y-4">
-                <h3 className="font-semibold">Connect</h3>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button className="flex-1" asChild>
-                    <a href={`mailto:${teamMember.email}`}>
-                      <Mail className="w-4 h-4 mr-2" />
-                      Email
-                    </a>
-                  </Button>
-                  <Button variant="outline" className="flex-1" asChild>
-                    <a href={`tel:${teamMember.phone}`}>
-                      <Phone className="w-4 h-4 mr-2" />
-                      Call
-                    </a>
-                  </Button>
-                </div>
-
-                {teamMember.linkedin && (
-                  <Button variant="outline" className="w-full" asChild>
-                    <a href={teamMember.linkedin} target="_blank" rel="noopener noreferrer">
-                      <Linkedin className="w-4 h-4 mr-2" />
-                      LinkedIn Profile
-                    </a>
-                  </Button>
-                )}
-              </div>
-
-              {/* Specializations */}
-              <div>
-                <h3 className="font-semibold mb-3">Specializations</h3>
-                <div className="flex flex-wrap gap-2">
-                  {teamMember.specializations.map((spec, index) => (
-                    <Badge key={index} variant="secondary" className="text-xs">
-                      {spec}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+            {onRetry && (
+              <Button onClick={onRetry}>
+                Try Again
+              </Button>
+            )}
           </div>
-        </div>
-      </section>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
-      {/* About Section */}
-      <section className="py-16 lg:py-24">
+// Stat card component
+function StatCard({ value, label, icon: Icon }: { value: string; label: string; icon: React.ElementType }) {
+  return (
+    <Card>
+      <CardContent className="text-center p-6">
+        <div className="w-12 h-12 mx-auto mb-3 bg-black/5 rounded-full flex items-center justify-center">
+          <Icon className="w-6 h-6 text-black" />
+        </div>
+        <div className="text-3xl font-bold text-black mb-1">
+          {value}
+        </div>
+        <div className="text-gray-600 text-sm font-medium">{label}</div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// Contact button component
+function ContactButton({
+  href,
+  icon: Icon,
+  children,
+  variant = "default",
+  ...props
+}: {
+  href: string;
+  icon: React.ElementType;
+  children: React.ReactNode;
+  variant?: "default" | "outline";
+} & React.ComponentProps<typeof Button>) {
+  return (
+    <Button
+      variant={variant}
+      className={cn(
+        "px-6 py-3 rounded-lg",
+        variant === "default" && "bg-black hover:bg-gray-800 text-white",
+        variant === "outline" && "border-gray-300 text-gray-700 hover:bg-gray-50"
+      )}
+      asChild
+      {...props}
+    >
+      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
+        <Icon className="w-4 h-4 mr-2" />
+        {children}
+      </a>
+    </Button>
+  );
+}
+
+export function TeamMemberContent({
+  member,
+  isLoading = false,
+  error = null,
+  className
+}: TeamMemberContentProps) {
+  // Handle loading state
+  if (isLoading) {
+    return <TeamMemberContentSkeleton />;
+  }
+
+  // Handle error state
+  if (error) {
+    return <TeamMemberError error={error} />;
+  }
+
+  // Handle missing member data
+  if (!member) {
+    return (
+      <TeamMemberError
+        error="Team member not found"
+        onRetry={() => window.location.reload()}
+      />
+    );
+  }
+
+  const {
+    name,
+    role,
+    credentials,
+    image,
+    longBio,
+    bio,
+    experience_years,
+    projects_completed,
+    awards = [],
+    specializations,
+    skills,
+    education,
+    email,
+    linkedin,
+    phone
+  } = member;
+
+  return (
+    <div className={cn("min-h-screen bg-white", className)}>
+      {/* Back Button */}
+      <div className="pt-8 bg-white sticky top-0 z-30 border-b">
         <div className="container mx-auto px-6 lg:px-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <Button
+            variant="outline"
+            size="sm"
+            className="mb-8 bg-white/95 backdrop-blur-sm"
+            asChild
           >
-            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-8">
-              About {teamMember.name.split(' ')[0]}
+            <Link href="/team" aria-label="Back to team page">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Team
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      {/* Image Section */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative overflow-hidden rounded-lg"
+      >
+        <Image
+          src={image}
+          alt={`Portrait of ${name}`}
+          width={800}
+          height={600}
+          className="w-full h-auto"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="absolute bottom-6 left-6 right-6 text-white"
+        >
+          <h1 className="text-2xl md:text-3xl font-bold mb-1">{name}</h1>
+          <p className="text-lg md:text-xl mb-1 opacity-90">{role}</p>
+          {credentials && (
+            <p className="text-base opacity-75">{credentials}</p>
+          )}
+        </motion.div>
+      </motion.div>
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Bio Section */}
+        <section className="mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Biography</h2>
+          <div className="prose prose-lg max-w-none">
+            <p className="text-gray-700 leading-relaxed text-base md:text-lg">
+              {longBio || bio}
+            </p>
+          </div>
+        </section>
+
+        {/* Stats Section */}
+        {(experience_years || projects_completed || awards.length > 0) && (
+          <section className="mb-12">
+            <h2 className="sr-only">Key Statistics</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+              {experience_years && (
+                <StatCard
+                  value={`${experience_years}+`}
+                  label="Years Experience"
+                  icon={Calendar}
+                />
+              )}
+              {projects_completed && (
+                <StatCard
+                  value={`${projects_completed}+`}
+                  label="Projects Completed"
+                  icon={Target}
+                />
+              )}
+              {awards.length > 0 && (
+                <StatCard
+                  value={`${awards.length}+`}
+                  label="Awards"
+                  icon={Award}
+                />
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Specializations */}
+        {specializations && specializations.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Specializations
             </h2>
-            <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
-              {teamMember.longBio.split('\n').map((paragraph, index) => (
-                <p key={index} className="mb-4">
-                  {paragraph}
-                </p>
+            <div className="flex flex-wrap gap-2 md:gap-3">
+              {specializations.map((spec: string, index: number) => (
+                <Badge
+                  key={index}
+                  variant="secondary"
+                  className="bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-black/90 transition-colors"
+                >
+                  {spec}
+                </Badge>
               ))}
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </section>
+        )}
 
-      {/* Featured Projects */}
-      <section className="py-16 lg:py-24 bg-muted/30">
-        <div className="container mx-auto px-6 lg:px-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-4">
-              Featured Projects
+        {/* Skills */}
+        {skills && skills.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Skills & Expertise
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Selected works that showcase {teamMember.name.split(' ')[0]}'s expertise and design philosophy.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMember.featured_projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <Card className="overflow-hidden border-0 shadow-lg group hover:shadow-xl transition-shadow">
-                  <div className="aspect-[4/3] relative overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <Badge className="text-xs">{project.year}</Badge>
-                    </div>
+            <div className="grid gap-6 md:gap-8">
+              {skills.map((skillGroup, index) => (
+                <div key={index}>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3 capitalize flex items-center">
+                    <Zap className="w-5 h-5 mr-2 text-black" />
+                    {skillGroup.category}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {skillGroup.skills.map((skill: string, skillIndex: number) => (
+                      <Badge
+                        key={skillIndex}
+                        variant="outline"
+                        className="bg-gray-50 text-gray-700 px-3 py-1.5 rounded-lg text-sm border-gray-200"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
                   </div>
-
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills & Education */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-6 lg:px-20">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Skills */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-8">
-                Skills & Expertise
-              </h2>
-              <div className="space-y-6">
-                {teamMember.skills.map((skillGroup, index) => (
-                  <div key={index}>
-                    <h3 className="font-semibold text-lg mb-3">{skillGroup.category}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {skillGroup.skills.map((skill, skillIndex) => (
-                        <Badge key={skillIndex} variant="outline" className="text-sm">
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Education & Awards */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-8"
-            >
-              {/* Education */}
-              <div>
-                <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-8">
-                  Education
-                </h2>
-                <div className="space-y-4">
-                  {teamMember.education.map((edu, index) => (
-                    <div key={index} className="flex">
-                      <div className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2 mr-4"></div>
-                      <div>
-                        <p className="text-sm font-medium">{edu}</p>
-                      </div>
-                    </div>
-                  ))}
                 </div>
-              </div>
-
-              {/* Awards */}
-              <div>
-                <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-8">
-                  Awards & Recognition
-                </h2>
-                <div className="space-y-4">
-                  {teamMember.awards.map((award, index) => (
-                    <div key={index} className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4">
-                      <div className="flex items-center space-x-2">
-                        <Award className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span className="text-sm">{award}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Philosophies */}
-      <section className="py-16 lg:py-24 bg-muted/30">
-        <div className="container mx-auto px-6 lg:px-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <LineSweep />
-            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mt-6 mb-4">
-              Design Philosophy
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide {teamMember.name.split(' ')[0]}'s approach to architecture and design.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {teamMember.philosophies.map((philosophy, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-                  <CardContent className="p-0">
-                    <Quote className="w-8 h-8 mx-auto text-primary/50 mb-4" />
-                    <p className="text-sm leading-relaxed">{philosophy}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 lg:py-24 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-6 lg:px-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-4">
-              Ready to Work with {teamMember.name.split(' ')[0]}?
-            </h2>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8 leading-relaxed">
-              {teamMember.name.split(' ')[0]} specializes in bringing innovative design solutions to life. Let's discuss your project and see how we can collaborate.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="min-w-[200px]" asChild>
-                <Link href="/contact">Start a Project</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="min-w-[200px] bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
-                <Link href="/meet-our-team">Meet the Full Team</Link>
-              </Button>
+              ))}
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </section>
+        )}
+
+        {/* Education */}
+        {education && education.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Education
+            </h2>
+            <div className="space-y-4">
+              {education.map((edu: string, index: number) => (
+                <div key={index} className="flex items-start group">
+                  <div className="w-2 h-2 bg-black rounded-full mt-3 mr-4 flex-shrink-0 group-hover:scale-125 transition-transform" />
+                  <div className="flex items-start">
+                    <GraduationCap className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                    <p className="text-gray-700 text-base md:text-lg">{edu}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Awards */}
+        {awards && awards.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              Awards & Recognition
+            </h2>
+            <div className="grid gap-3 md:gap-4">
+              {awards.map((award: string, index: number) => (
+                <Card key={index} className="border-l-4 border-l-black">
+                  <CardContent className="p-4 flex items-start">
+                    <Award className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">{award}</span>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Contact Section */}
+        <section className="border-t pt-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+            Get In Touch
+          </h2>
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+            {email && (
+              <ContactButton href={`mailto:${email}`} icon={Mail}>
+                Send Email
+              </ContactButton>
+            )}
+            {linkedin && (
+              <ContactButton href={linkedin} icon={Linkedin} variant="outline">
+                Connect on LinkedIn
+              </ContactButton>
+            )}
+            {phone && (
+              <ContactButton href={`tel:${phone}`} icon={Phone} variant="outline">
+                Call {phone}
+              </ContactButton>
+            )}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

@@ -42,7 +42,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
       "Judy is an architect driven by the belief that well-considered design improves how people live, work, and interact with space. She graduated with a Bachelor of Architecture from the Technical University of Mombasa in 2022. Since then, she has worked across residential, commercial, and small institutional projects, focusing on sustainable building strategies and community-minded architecture. Her approach combines research, material sensitivity, and client collaboration to develop solutions that are functional, enduring, and culturally aligned. Judy’s contributions have shaped the studio’s design philosophy, and she has been a key part of the successful delivery of more than 21 built and ongoing projects.",
     image: "/mockdata/team/Judy Chesire.jpg",
     credentials: "B.Arch",
-    experience: "3 years",
+    experience: "5 years",
     specializations: [
       "Sustainable Architecture",
       "Residential Design",
@@ -55,7 +55,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
     education: [
       "Bachelor of Architecture, Technical University of Mombasa (2022)"
     ],
-    experience_years: 3,
+    experience_years: 5,
     projects_completed: 21,
     awards: [],
     featured_projects: [
@@ -115,7 +115,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
       "Kevin graduated with a Bachelor of Architecture from the Technical University of Mombasa in 2023. He leads visualization and spatial design, bringing concepts to life through precise drawings, 3D modeling, rendering, and digital simulations. His strengths lie in interior detailing, visual storytelling, and translating user needs into thoughtful spatial arrangements. Kevin ensures that each project is clearly communicated to clients through immersive visual outputs, playing a central role in the delivery of more than 21 collective studio projects.",
     image: "/mockdata/team/Kevin Yegon.png",
     credentials: "B.Arch",
-    experience: "2 years",
+    experience: "5 years",
     specializations: [
       "3D Visualization",
       "Interior Architecture",
@@ -128,7 +128,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
     education: [
       "Bachelor of Architecture, Technical University of Mombasa (2023)"
     ],
-    experience_years: 2,
+    experience_years: 5,
     projects_completed: 21,
     awards: [],
     featured_projects: [
@@ -187,7 +187,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
       "Weldon graduated with a Bachelor of Architecture from Kenyatta University in 2022 and is currently pursuing a Master's degree. His role blends architectural design with project management, ensuring that concepts progress efficiently from drawings to site. Weldon coordinates consultants, manages client expectations, prepares documentation, and leads site follow-ups. His structured approach and attention to detail have helped the team successfully deliver over 21 collaborative projects. His ongoing postgraduate studies strengthen his technical, managerial, and research capabilities.",
     image: "/mockdata/team/Kimwetich Weldon.png",
     credentials: "B.Arch, M.Arch (ongoing)",
-    experience: "3 years",
+    experience: "6 years",
     specializations: [
       "Project Management",
       "Client Relations",
@@ -201,7 +201,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
       "Bachelor of Architecture, Kenyatta University (2022)",
       "Master of Architecture (Ongoing), Kenyatta University (2024– )"
     ],
-    experience_years: 3,
+    experience_years: 6,
     projects_completed: 21,
     awards: [],
     featured_projects: [
@@ -254,10 +254,13 @@ export function getAllTeamMembers(): TeamMemberData[] {
   return Object.values(teamMembers);
 }
 
-export function getTeamMemberBySlug(slug: string): TeamMemberData | undefined {
-  return teamMembers[slug];
+export async function getTeamMemberBySlug(slug: string): Promise<TeamMemberData | null> {
+  // Simulate async operation for static generation
+  const member = teamMembers[slug];
+  return Promise.resolve(member || null);
 }
 
-export function getAllTeamMemberSlugs(): string[] {
-  return Object.keys(teamMembers);
+export async function getAllTeamMemberSlugs(): Promise<string[]> {
+  // Simulate async operation for static generation
+  return Promise.resolve(Object.keys(teamMembers));
 }

@@ -47,7 +47,6 @@ export default function Home() {
             <Process />
             {/* <Services /> */}
 
-            <StudioSnapshot />
             <Testimonials />
             <ContactCTA />
           </main>
