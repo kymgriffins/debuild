@@ -2,28 +2,23 @@
 
 import Link from "next/link";
 
-const footerLinks = {
-  services: [
-    { name: 'Architectural Design', href: '#' },
-    { name: 'Interior Design', href: '#' },
-    { name: 'Project Management', href: '#' },
-    { name: 'Consultation', href: '#' },
-    { name: '3D Visualization', href: '#' },
-  ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Process', href: '#process' },
-    { name: 'Studio', href: '#studio' },
-    { name: 'Careers', href: '#' },
-    { name: 'News', href: '#' },
-  ],
-  connect: [
-    { name: 'Instagram', href: '#' },
-    { name: 'LinkedIn', href: '#' },
-    { name: 'Twitter', href: '#' },
-    { name: 'Contact', href: '#contact' },
-  ],
-};
+const footerNavigation = [
+  { title: "Home", url: "/" },
+  { title: "About", url: "/about" },
+  { title: "Blog", url: "/blog" },
+  { title: "Work", url: "/projects" },
+  { title: "Terms", url: "/terms-conditions" },
+  { title: "Privacy Policy", url: "/privacy-policy" }
+];
+
+const socialMediaLinks = [
+  { title: "Facebook", url: "https://www.facebook.com/weldon.kimutai.96/" },
+  { title: "Instagram", url: "https://www.instagram.com/weldon_kym/" },
+  { title: "Twitter", url: "https://x.com/kym_weldon" },
+  { title: "LinkedIn", url: "https://www.linkedin.com/in/weldon-kimutai-380610173" }
+];
+
+const currentYear = new Date().getFullYear();
 
 export function Footer() {
   return (
@@ -43,72 +38,69 @@ export function Footer() {
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
               Crafting architectural experiences that shape how we live, work, and connect with one another. Every space tells a story.
             </p>
+          </div>
 
-            <div className="flex space-x-4">
-              {['Instagram', 'LinkedIn', 'Twitter'].map((platform) => (
+          {/* Contact Information */}
+          <div>
+            <h3 className="text-sm font-semibold tracking-wide text-foreground mb-4">
+              Contact
+            </h3>
+            <ul className="space-y-3">
+              <li>
                 <a
-                  key={platform}
-                  href="#"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label={platform}
+                  href="mailto:outlinedesignsltd@gmail.com"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <span className="text-sm font-medium">{platform[0]}</span>
+                  outlinedesignsltd@gmail.com
                 </a>
-              ))}
-            </div>
+              </li>
+              <li>
+                <a
+                  href="https://maps.google.com/?q=South+Bend,+Indiana,+USA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  South Bend, Indiana, USA
+                </a>
+              </li>
+            </ul>
           </div>
 
-          {/* Services Column */}
+          {/* Navigation */}
           <div>
             <h3 className="text-sm font-semibold tracking-wide text-foreground mb-4">
-              Services
+              Navigation
             </h3>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
+              {footerNavigation.map((link) => (
+                <li key={link.title}>
+                  <Link
+                    href={link.url}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {link.name}
-                  </a>
+                    {link.title}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Company Column */}
+          {/* Social Media */}
           <div>
             <h3 className="text-sm font-semibold tracking-wide text-foreground mb-4">
-              Company
+              Follow Us
             </h3>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
+              {socialMediaLinks.map((social) => (
+                <li key={social.title}>
                   <a
-                    href={link.href}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Connect Column */}
-          <div>
-            <h3 className="text-sm font-semibold tracking-wide text-foreground mb-4">
-              Connect
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.connect.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.name}
+                    {social.title}
                   </a>
                 </li>
               ))}
@@ -137,18 +129,15 @@ export function Footer() {
         <div className="border-t border-border mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-muted-foreground">
-              © 2025 ODL Architecture Studio. All rights reserved.
+              © Outline {currentYear}
             </div>
 
             <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-              <Link href="#" className="hover:text-foreground transition-colors">
+              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Cookies
+              <Link href="/terms-conditions" className="hover:text-foreground transition-colors">
+                Terms & Conditions
               </Link>
             </div>
 
