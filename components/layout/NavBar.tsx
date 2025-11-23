@@ -6,10 +6,10 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navigation = [
-  { name: 'Work', href: '#work' },
-  { name: 'Studio', href: '#studio' },
-  { name: 'Process', href: '#process' },
-  { name: 'Services', href: '#services' },
+  { name: 'Home', href: '/' },
+  { name: 'Work', href: '/projects' },
+  { name: 'Team', href: '/team' },
+  { name: 'Services', href: '/services' },
   { name: 'Contact', href: '#contact' },
 ];
 

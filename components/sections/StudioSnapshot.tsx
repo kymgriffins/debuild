@@ -17,20 +17,25 @@ import {
   ArrowRight
 } from "lucide-react";
 
+import { getAllTeamMembers } from "@/lib/teams";
+
 const team = [
   {
+    slug: "judy-chesire",
     name: "Judy Chesire",
     role: "Principal Architect",
     image: "/mockdata/team/Judy Chesire.jpg",
     credentials: "B.Arch , Project Manager "
   },
   {
+    slug: "kevin-yegon",
     name: "Kevin Yegon",
     role: "Design Director",
     image: "/mockdata/team/Kevin Yegon.png",
     credentials: "B.Arch, BIM Specialist"
   },
   {
+    slug: "kimwetich-weldon",
     name: "Kimwetich Weldon",
     role: "Project Manager",
     image: "/mockdata/team/Kimwetich Weldon.png",
@@ -39,10 +44,10 @@ const team = [
 ];
 
 const stats = [
-  { label: "Years Experience", value: "15+" },
-  { label: "Projects Completed", value: "200+" },
+  { label: "Years Experience", value: "+5" },
+  { label: "Projects Completed", value: "21+" },
   { label: "Team Members", value: "25" },
-  { label: "Awards Won", value: "50+" }
+  { label: "Awards Won", value: "3+" }
 ];
 
 const pressLogos = [
@@ -120,7 +125,7 @@ export function StudioSnapshot() {
                 <span>Nairobi, Kenya</span>
                 <span>•</span>
                 <Calendar className="w-4 h-4" />
-                <span>Est. 2008</span>
+                <span>Est. 2020</span>
               </div>
 
               <p className="text-muted-foreground leading-relaxed">
@@ -161,21 +166,23 @@ export function StudioSnapshot() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
-                    <Card className="border-0 shadow-sm bg-card/50 backdrop-blur-sm">
-                      <CardContent className="p-4">
-                        <div className="flex items-center space-x-4">
-                          <Avatar className="w-12 h-12">
-                            <AvatarImage src={member.image} alt={member.name} />
-                            <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-sm">{member.name}</h4>
-                            <p className="text-xs text-muted-foreground">{member.role}</p>
-                            <p className="text-xs text-primary font-medium">{member.credentials}</p>
+                    <Link href={`/team/${member.slug}`} className="block group">
+                      <Card className="border-0 shadow-sm bg-card/50 backdrop-blur-sm hover:bg-card/70 transition-colors cursor-pointer">
+                        <CardContent className="p-4">
+                          <div className="flex items-center space-x-4">
+                            <Avatar className="w-12 h-12">
+                              <AvatarImage src={member.image} alt={member.name} />
+                              <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1">
+                              <h4 className="font-semibold text-sm group-hover:text-primary transition-colors">{member.name}</h4>
+                              <p className="text-xs text-muted-foreground">{member.role}</p>
+                              <p className="text-xs text-primary font-medium">{member.credentials}</p>
+                            </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
@@ -234,7 +241,7 @@ export function StudioSnapshot() {
             Experience our award-winning design process firsthand.
           </p>
           <Button size="lg" className="min-w-[200px]" asChild>
-            <Link href="/contact">
+            <Link href="/team">
               Meet Our Team
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>

@@ -41,7 +41,8 @@ export default function Home() {
 
           <main>
             <Hero />
-            <Philosophy />
+            <StudioSnapshot />
+            {/* <Philosophy /> */}
             <FeaturedProjects />
             <Process />
             {/* <Services /> */}

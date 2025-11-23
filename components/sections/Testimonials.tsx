@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { StaggerChildren } from "@/components/motion/StaggerChildren";
 import { LineSweep } from "@/components/motion/LineSweep";
 import { Button } from "@/components/ui/button";
@@ -20,58 +21,36 @@ import {
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Chen",
-    role: "Property Developer",
-    company: "Chen Developments",
-    image: "/mockdata/team/Judychesire.jpg",
-    content: "Working with this team transformed our vision into reality. Their attention to detail and innovative approach to sustainable design exceeded our expectations. The project finished on time and within budget.",
-    project: "Eco-Resort Development",
+    name: "Amos Komen",
+    role: "CEO",
+    company: "Komen Holdings",
+    image: "/mockdata/team/Judy Chesire.jpg",
+    content: "Their architectural designs transformed my vision into reality with precision and elegance. Every detail was handled expertly.",
+    project: "Commercial Development",
     rating: 5,
-    metrics: ["20% energy savings", "6 month completion"]
+    metrics: ["Vision realized", "Expert execution"]
   },
   {
     id: 2,
-    name: "Marcus Johnson",
-    role: "CEO",
-    company: "Johnson Enterprises",
-    image: "/mockdata/team/kevin.png",
-    content: "The 3D visualizations were incredible - they helped us secure financing and communicate our vision to stakeholders. The final building is even better than the renders suggested.",
-    project: "Commercial Complex",
-    rating: 5,
-    metrics: ["$2.3M project value", "Pre-financing secured"]
+    name: "Rowell Egesa",
+    role: "Founder",
+    company: "Egesa Urban Planning",
+    image: "/mockdata/team/Kevin Yegon.png",
+    content: "Creative and professional from start to finish. Their team helped us achieve a sustainable design with innovative solutions.",
+    project: "Urban Planning Project",
+    rating: 4,
+    metrics: ["Sustainable design", "Innovative solutions"]
   },
   {
     id: 3,
-    name: "Emma Rodriguez",
-    role: "Homeowner",
-    company: "Private Client",
-    image: "/mockdata/team/weldon.png",
-    content: "They didn't just design our home, they designed our lifestyle. Every space feels intentional and beautiful. The process was collaborative and stress-free from start to finish.",
-    project: "Custom Residence",
+    name: "Dr. Sarah",
+    role: "Director",
+    company: "HealthFirst Clinic",
+    image: "/mockdata/team/Kimwetich Weldon.png",
+    content: "The collaboration was seamless, and the final design greatly enhanced our facility's functionality and aesthetic appeal.",
+    project: "Healthcare Facility",
     rating: 5,
-    metrics: ["Award-winning design", "100% satisfaction"]
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    role: "Restaurant Owner",
-    company: "Kim's Bistro",
-    image: "/mockdata/Kijabe/me.png",
-    content: "Our restaurant space needed to balance functionality with ambiance. They delivered a space that not only looks stunning but also operates efficiently. Our customer traffic increased 40% after opening.",
-    project: "Restaurant Renovation",
-    rating: 5,
-    metrics: ["40% traffic increase", "Profitability improved"]
-  },
-  {
-    id: 5,
-    name: "Dr. Lisa Thompson",
-    role: "Medical Director",
-    company: "Thompson Healthcare",
-    image: "/mockdata/team/Judychesire.jpg",
-    content: "The healthcare facility design prioritizes patient comfort and staff efficiency. The evidence-based design approach has resulted in measurable improvements in patient outcomes and staff satisfaction.",
-    project: "Medical Center",
-    rating: 5,
-    metrics: ["Improved patient outcomes", "Staff efficiency +25%"]
+    metrics: ["Enhanced functionality", "Improved aesthetics"]
   }
 ];
 
@@ -131,49 +110,9 @@ export function Testimonials() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-          {/* Awards Section */}
-          <motion.div
-            className="lg:col-span-1"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="space-y-6">
-              <div className="flex items-center space-x-2">
-                <Award className="w-5 h-5 text-primary" />
-                <h3 className="text-lg font-semibold">Recognitions</h3>
-              </div>
-              <div className="space-y-3">
-                {awards.slice(0, 4).map((award, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                  >
-                    <Badge variant="outline" className="text-xs">
-                      {award.name} {award.year}
-                    </Badge>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="pt-4">
-                <div className="flex items-center space-x-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                  ))}
-                  <span className="text-sm text-muted-foreground ml-2">4.9/5 rating</span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">Based on 150+ reviews</p>
-              </div>
-            </div>
-          </motion.div>
-
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16 items-center">
           {/* Testimonial Carousel */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             {/* Main Testimonial */}
             <motion.div
               key={currentIndex}
@@ -305,9 +244,14 @@ export function Testimonials() {
           <p className="text-muted-foreground mb-6">
             Ready to create something extraordinary together?
           </p>
-          <Button size="lg" className="min-w-[200px]">
-            Start Your Project
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="min-w-[200px]" asChild>
+            <Link href="/team">Meet Our Team</Link>
           </Button>
+            <Button size="lg" variant="outline" className="min-w-[200px]" asChild>
+              <Link href="/meet-our-team">View Full Team</Link>
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>
