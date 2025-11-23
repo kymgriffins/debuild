@@ -16,63 +16,90 @@ import {
   Eye,
   ArrowRight,
   Star,
-  CheckCircle
+  CheckCircle,
+  Crown,
+  Sparkles,
+  TreePine,
+  FileCheck,
+  DollarSign,
+  TrendingUp
 } from "lucide-react";
 
-const services = [
+const servicePillars = [
   {
     icon: Building,
-    title: "Architectural Design",
-    description: "Comprehensive design from concept to construction docs. We create spaces that tell stories.",
-    features: ["Concept to Completion", "Permit Coordination", "Construction Docs"],
-    pricing: "From $5,000",
-    popular: false,
-    cta: "Start Project"
-  },
-  {
-    icon: Home,
-    title: "Interior Design",
-    description: "Transform spaces with expert interior design that reflects your vision and personality.",
-    features: ["Space Planning", "Material Selection", "Lighting Design"],
-    pricing: "From $2,500",
-    popular: true,
-    cta: "Transform Space"
-  },
-  {
-    icon: Palette,
-    title: "3D Visualization",
-    description: "Photorealistic renderings that bring your vision to life before construction begins.",
-    features: ["VR Tours", "Animation Videos", "Material Studies"],
-    pricing: "From $800",
-    popular: false,
-    cta: "See Your Project"
-  },
-  {
-    icon: Wrench,
-    title: "Project Management",
-    description: "Expert oversight ensuring your project stays on time, on budget, and exceeds expectations.",
-    features: ["Construction Mgmt", "Quality Control", "Timeline Tracking"],
-    pricing: "From $3,000",
-    popular: false,
-    cta: "Get Started"
+    title: "Architecture",
+    subtitle: "Visual & Functional Design",
+    description: "Complete architectural design services from concept to construction documentation.",
+    features: [
+      "Concept design & floor plans",
+      "Elevations & façade development",
+      "3D visualization & walkthroughs",
+      "Material & finish specifications",
+      "Construction documentation",
+      "Permit coordination"
+    ],
+    popular: false
   },
   {
     icon: Zap,
-    title: "Sustainable Consulting",
-    description: "Eco-friendly designs with green technologies for environmentally responsible architecture.",
-    features: ["Energy Analysis", "LEED Certification", "Green Materials"],
-    pricing: "From $2,000",
-    popular: false,
-    cta: "Go Green"
+    title: "Engineering",
+    subtitle: "Structural & MEP Systems",
+    description: "Comprehensive engineering solutions ensuring safety, functionality, and compliance.",
+    features: [
+      "Structural design & load calculations",
+      "MEP systems (HVAC, Electrical, Plumbing)",
+      "Energy efficiency consulting",
+      "Building safety verification",
+      "Compliance documentation",
+      "Inspection preparation"
+    ],
+    popular: true
   },
   {
-    icon: Eye,
-    title: "Feasibility Studies",
-    description: "Comprehensive analysis to ensure your project's success from the ground up.",
-    features: ["Site Analysis", "Cost Estimation", "Risk Assessment"],
-    pricing: "From $1,500",
-    popular: false,
-    cta: "Assess Viability"
+    icon: Home,
+    title: "Interiors",
+    subtitle: "Space Experience Design",
+    description: "Detailed interior architecture that transforms spaces into remarkable experiences.",
+    features: [
+      "Furniture & space planning",
+      "Interior material selection",
+      "Lighting scene design",
+      "Cabinetry & joinery drawings",
+      "Interior finishing schedules",
+      "360° preview experiences"
+    ],
+    popular: false
+  },
+  {
+    icon: TreePine,
+    title: "Outdoor & Landscape",
+    subtitle: "Environmental Integration",
+    description: "Complete outdoor design integrating buildings with their natural surroundings.",
+    features: [
+      "Landscaping & softscape design",
+      "Hardscape & outdoor structures",
+      "Irrigation & drainage systems",
+      "Garden lighting & features",
+      "Sustainable outdoor solutions",
+      "Environmental integration"
+    ],
+    popular: false
+  },
+  {
+    icon: TrendingUp,
+    title: "Project Delivery",
+    subtitle: "Management & Delivery",
+    description: "End-to-end project management ensuring seamless delivery from design to completion.",
+    features: [
+      "Full project lifecycle management",
+      "Cost estimation & BOQ development",
+      "Timeline tracking & milestones",
+      "Quality control & inspections",
+      "Client progress reporting",
+      "Post-construction support"
+    ],
+    popular: false
   }
 ];
 
@@ -99,66 +126,66 @@ export function Services() {
 
         {/* Services Grid */}
         <StaggerChildren
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10"
           staggerDelay={0.1}
         >
-          {services.map((service, index) => (
+          {servicePillars.map((pillar, index) => (
             <motion.div
-              key={service.title}
-              whileHover={{ y: -5 }}
+              key={pillar.title}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.2 }}
             >
-              <Card className="relative h-full group hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-card/50 backdrop-blur-sm">
+              <Card className="relative h-full group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-card/50 backdrop-blur-sm">
                 {/* Popular Badge */}
-                {service.popular && (
-                  <div className="absolute -top-3 left-6 z-10">
-                    <Badge className="bg-primary text-primary-foreground px-3 py-1 text-xs font-medium">
-                      <Star className="w-3 h-3 mr-1" />
-                      Most Popular
+                {pillar.popular && (
+                  <div className="absolute -top-4 left-8 z-10">
+                    <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-4 py-2 text-sm font-medium shadow-md">
+                      <Crown className="w-4 h-4 mr-2" />
+                      Most Comprehensive
                     </Badge>
                   </div>
                 )}
 
-                <CardHeader className="pb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300">
-                    <service.icon className="w-6 h-6 text-primary" />
+                <CardHeader className="pb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-6 group-hover:from-primary/30 group-hover:to-primary/20 transition-all duration-300 shadow-sm">
+                    <pillar.icon className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="text-xl font-medium mb-2 group-hover:text-primary transition-colors duration-300">
-                    {service.title}
-                  </CardTitle>
-                  <p className="text-muted-foreground/80 text-sm leading-relaxed">
-                    {service.description}
+                  <div className="space-y-2">
+                    <CardTitle className="text-2xl font-semibold group-hover:text-primary transition-colors duration-300">
+                      {pillar.title}
+                    </CardTitle>
+                    <p className="text-primary/80 font-medium text-sm uppercase tracking-wide">
+                      {pillar.subtitle}
+                    </p>
+                  </div>
+                  <p className="text-muted-foreground/80 text-base leading-relaxed mt-4">
+                    {pillar.description}
                   </p>
                 </CardHeader>
 
                 <CardContent className="pt-0">
                   {/* Features */}
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm">
-                        <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                        <span className="text-muted-foreground">{feature}</span>
+                  <ul className="space-y-3 mb-8">
+                    {pillar.features.map((feature: string, featureIndex: number) => (
+                      <li key={featureIndex} className="flex items-start text-sm">
+                        <CheckCircle className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground leading-relaxed">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {/* Pricing & CTA */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-foreground">
-                      {service.pricing}
-                    </span>
-                    <Button
-                      variant={service.popular ? "default" : "outline"}
-                      size="sm"
-                      className="group/button"
-                      asChild
-                    >
-                      <Link href="/contact" className="flex items-center">
-                        {service.cta}
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
-                      </Link>
-                    </Button>
-                  </div>
+                  {/* CTA */}
+                  <Button
+                    variant={pillar.popular ? "default" : "outline"}
+                    size="lg"
+                    className="w-full group/button shadow-sm hover:shadow-md transition-all duration-300"
+                    asChild
+                  >
+                    <Link href="/contact" className="flex items-center justify-center">
+                      Get Started with {pillar.title}
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             </motion.div>

@@ -9,11 +9,13 @@ interface TextScrambleProps {
   className?: string;
 }
 
-function TextScramble({ text, className = "" }: TextScrambleProps) {
-  const [displayText, setDisplayText] = useState("");
+function TextScramble({ text, className = "", enabled = true }: TextScrambleProps & { enabled?: boolean }) {
+  const [displayText, setDisplayText] = useState(enabled ? "" : text);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    if (!enabled) return;
+
     if (!isAnimating) {
       setIsAnimating(true);
 
@@ -47,13 +49,26 @@ function TextScramble({ text, className = "" }: TextScrambleProps) {
 
       animate();
     }
-  }, [text, isAnimating]);
+  }, [text, isAnimating, enabled]);
 
   return <span className={className}>{displayText}</span>;
 }
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [hasVisited, setHasVisited] = useState(false);
+
+  // Check if user has visited before to limit animations
+  useEffect(() => {
+    const visited = localStorage.getItem('hero-visited');
+    setHasVisited(!!visited);
+
+    // Set visited flag for next time
+    if (!visited) {
+      localStorage.setItem('hero-visited', 'true');
+    }
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -77,15 +92,15 @@ export function Hero() {
         {/* Headline */}
         <motion.div
           className="space-y-4 md:space-y-6 max-w-4xl"
-          initial={{ opacity: 0, y: 30 }}
+          initial={hasVisited ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: hasVisited ? 0.3 : 0.8, ease: "easeOut" }}
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight leading-tight">
             <span className="block">Architectural</span>
             <span className="block">Design</span>
             <span className="block text-muted-foreground mt-2">
-              <TextScramble text="Excellence" />
+              <TextScramble text="Excellence" enabled={!hasVisited} />
             </span>
           </h1>
           <motion.p
@@ -106,6 +121,9 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.2 }}
         >
+          {/* <Button size="lg" className="min-w-[160px] sm:min-w-[180px] text-base sm:text-lg bg-primary hover:bg-primary/90">
+            Subscribe to Updates
+          </Button> */}
           <Button size="lg" className="min-w-[160px] sm:min-w-[180px] text-base sm:text-lg">
             Explore Our Work
           </Button>

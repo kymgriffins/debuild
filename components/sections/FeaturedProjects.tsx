@@ -1,7 +1,8 @@
- "use client";
+"use client";
 
 import { motion, useInView, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { SlideUp } from "@/components/motion/SlideUp";
 import { LineSweep } from "@/components/motion/LineSweep";
@@ -105,23 +106,24 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 60, scale: 0.95 }}
-      animate={isInView ? {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-          duration: 0.8,
-          delay: index * 0.15,
-          type: "spring",
-          stiffness: 80
-        }
-      } : { opacity: 0, y: 60, scale: 0.95 }}
-      className={`group cursor-pointer ${layoutClasses[layout]}`}
-      style={{ perspective: 1200 }}
-    >
+    <Link href={`/project/${imageData.projectId}`}>
+      <motion.div
+        ref={cardRef}
+        initial={{ opacity: 0, y: 60, scale: 0.95 }}
+        animate={isInView ? {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          transition: {
+            duration: 0.8,
+            delay: index * 0.15,
+            type: "spring",
+            stiffness: 80
+          }
+        } : { opacity: 0, y: 60, scale: 0.95 }}
+        className={`group cursor-pointer ${layoutClasses[layout]}`}
+        style={{ perspective: 1200 }}
+      >
       <motion.div
         className={`relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-2xl transition-all duration-700 border border-gray-100 ${sizeClasses[size]}`}
         whileHover={{
@@ -305,7 +307,8 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
           </motion.div>
         </div>
       </motion.div>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
 

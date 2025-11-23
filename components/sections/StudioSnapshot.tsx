@@ -93,7 +93,7 @@ export function StudioSnapshot() {
             <div className="relative">
               <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-muted">
                 <Image
-                  src="/mockdata/Kijabe/001.png"
+                  src="/mockdata/renders/Photo_ModernHouse_Exterior.jpeg"
                   alt="Studio workspace"
                   fill
                   className="object-cover"

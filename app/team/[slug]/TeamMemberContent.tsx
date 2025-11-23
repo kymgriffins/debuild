@@ -24,6 +24,9 @@ import { getTeamMemberBySlug, type TeamMemberData } from "@/lib/teams";
 import { cn } from "@/lib/utils";
 import { LineSweep } from "@/components/motion/LineSweep";
 
+// Base64 blur placeholder - minimal transparent image
+const blur = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+no+I+eXteNz2Qh9gTKYmI9CPqbNzWqyxDaWJ6Yj7qXqTbUU+A+J8J7mNGO1XY4PKtJtpd0WWXVrSCNGKVJBobjcOT1gVeqD2oGKP6rSoJ9S+sDuOorsprQhUOPC8MrxHMwqQKaU6qUbC2nJrr3WFZoNzWXxaU6qP2lmvqL0M7tNcUyEpZFKDt7WBQxOSBh1K6WOJCjKJGmzPVCKuVjKrRTqL5JjlKJnlQcMTAg3IjvAEAgNXIqwXRbI0SGvZIIyLrNsLRvUXe6oZjWqIoSlIY/SFHFQGZQfJamYyoUZVTmqlLZxZL4TGZjGdRH9VrFSVhqSsVGeqVTFbzvGKnhXn+xLNntVjEMVUoOYNHkwnpWQqWrtWwLaVxOKVuEVBFqfTXyLRNZKMtNhTFxmQPiw4XUz+";
+
 interface TeamMemberContentProps {
   member: TeamMemberData;
   isLoading?: boolean;
@@ -207,15 +210,22 @@ export function TeamMemberContent({
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative overflow-hidden rounded-lg"
+        className="relative overflow-hidden rounded-lg aspect-[2/3]"
       >
         <Image
           src={image}
           alt={`Portrait of ${name}`}
-          width={800}
-          height={600}
-          className="w-full h-auto"
+          width={1600}
+          height={2400}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="w-full h-full object-cover"
+          placeholder="blur"
+          blurDataURL={blur}
+          quality={85}
+          priority={false}
         />
+
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -235,6 +245,7 @@ export function TeamMemberContent({
           )}
         </motion.div>
       </motion.div>
+
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Bio Section */}
