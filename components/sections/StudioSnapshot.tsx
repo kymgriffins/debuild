@@ -44,10 +44,10 @@ const team = [
 ];
 
 const stats = [
-  { label: "Years Experience", value: "15+" },
-  { label: "Projects Completed", value: "200+" },
+  { label: "Years Experience", value: "+5" },
+  { label: "Projects Completed", value: "21+" },
   { label: "Team Members", value: "25" },
-  { label: "Awards Won", value: "50+" }
+  { label: "Awards Won", value: "3+" }
 ];
 
 const pressLogos = [
@@ -125,7 +125,7 @@ export function StudioSnapshot() {
                 <span>Nairobi, Kenya</span>
                 <span>•</span>
                 <Calendar className="w-4 h-4" />
-                <span>Est. 2008</span>
+                <span>Est. 2020</span>
               </div>
 
               <p className="text-muted-foreground leading-relaxed">
@@ -241,7 +241,7 @@ export function StudioSnapshot() {
             Experience our award-winning design process firsthand.
           </p>
           <Button size="lg" className="min-w-[200px]" asChild>
-            <Link href="/contact">
+            <Link href="/team">
               Meet Our Team
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>

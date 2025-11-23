@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
+  // Removed cacheComponents to allow dynamic team member pages
 };
 
 export default nextConfig;

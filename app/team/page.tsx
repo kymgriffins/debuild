@@ -38,8 +38,16 @@ export default function TeamPage() {
       {/* Team Members Grid */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-6 lg:px-20">
+          {/* Debug: Show team members count */}
+          <div className="mb-8 p-4 bg-muted rounded-lg">
+            <p className="text-sm">Team Members Count: {teamMembers?.length || 0}</p>
+            {teamMembers?.length === 0 && (
+              <p className="text-sm text-red-500">No team members found. Check lib/teams.ts</p>
+            )}
+          </div>
+
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {teamMembers.map((member, index) => (
+            {teamMembers && teamMembers.length > 0 ? teamMembers.map((member, index) => (
               <motion.div
                 key={member.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -102,7 +110,7 @@ export default function TeamPage() {
                       </div>
 
                       <Button className="w-full group-hover:bg-primary/90 transition-colors" asChild>
-                        <Link href={`/team/member/${member.slug}`}>
+                        <Link href={`/team/${member.slug}`}>
                           View Full Profile
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Link>
@@ -111,7 +119,7 @@ export default function TeamPage() {
                   </CardContent>
                 </Card>
               </motion.div>
-            ))}
+            )) : null}
           </div>
         </div>
       </section>
