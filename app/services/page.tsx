@@ -202,11 +202,11 @@ export default function ServicesPage() {
               {/* Social Proof Stats */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-2xl mx-auto">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-1">500+</div>
+                  <div className="text-2xl font-bold text-primary mb-1">21+</div>
                   <div className="text-sm text-muted-foreground">Projects Completed</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-1">15+</div>
+                  <div className="text-2xl font-bold text-primary mb-1">5+</div>
                   <div className="text-sm text-muted-foreground">Years Experience</div>
                 </div>
                 <div className="text-center">
@@ -214,7 +214,7 @@ export default function ServicesPage() {
                   <div className="text-sm text-muted-foreground">Client Satisfaction</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary mb-1">50+</div>
+                  <div className="text-2xl font-bold text-primary mb-1">7+</div>
                   <div className="text-sm text-muted-foreground">Awards Won</div>
                 </div>
               </div>
@@ -318,57 +318,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Certifications & Partners */}
-        <section className="py-16 bg-card/30">
-          <div className="container mx-auto px-6 lg:px-20">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
-                Trusted by Industry Leaders
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                Certified excellence in architectural innovation and sustainable design
-              </p>
-            </div>
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-2">
-                  <Award className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-xs font-medium text-center">LEED Platinum</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-2">
-                  <Shield className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-xs font-medium text-center">BREEAM</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-2">
-                  <Building className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-xs font-medium text-center">ARB Certified</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-2">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-xs font-medium text-center">AIAA Member</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mb-2">
-                  <Zap className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-xs font-medium text-center">ISO 14001</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mb-2">
-                  <Award className="w-8 h-8 text-white" />
-                </div>
-                <span className="text-xs font-medium text-center">AIA Award Winner</span>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         {/* Interactive Timeline Calculator */}
         <section id="calculator" className="py-16">
@@ -507,39 +457,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-6 lg:px-20">
-            <div className="text-center mb-16">
-              <LineSweep />
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mt-6 mb-4">
-                Why Choose Us
-              </h2>
-              <p className="text-lg text-muted-foreground/90 max-w-2xl mx-auto">
-                Experience the difference of working with a team that combines creativity,
-                technical expertise, and unwavering commitment to excellence.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
-                <SlideUp key={benefit.title} delay={index * 0.1}>
-                  <Card className="border-0 shadow-md bg-card/50 backdrop-blur-sm text-center h-full">
-                    <CardContent className="p-6">
-                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                        <benefit.icon className="w-8 h-8 text-primary" />
-                      </div>
-                      <h3 className="text-lg font-semibold mb-3">{benefit.title}</h3>
-                      <p className="text-muted-foreground/80 text-sm leading-relaxed">
-                        {benefit.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </SlideUp>
-              ))}
-            </div>
-          </div>
-        </section>
+  
 
         {/* Final CTA Section */}
         <section className="py-16">
