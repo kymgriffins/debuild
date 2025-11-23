@@ -19,22 +19,22 @@ import {
 
 const team = [
   {
-    name: "Sarah Mitchell",
+    name: "Judy Chesire",
     role: "Principal Architect",
-    image: "/mockdata/team/Judychesire.jpg",
-    credentials: "LEED AP, AIA"
+    image: "/mockdata/team/Judy Chesire.jpg",
+    credentials: "B.Arch , Project Manager "
   },
   {
-    name: "James Carter",
+    name: "Kevin Yegon",
     role: "Design Director",
-    image: "/mockdata/team/kevin.png",
-    credentials: "M.Arch, NCARB"
+    image: "/mockdata/team/Kevin Yegon.png",
+    credentials: "B.Arch, BIM Specialist"
   },
   {
-    name: "Emma Weldon",
+    name: "Kimwetich Weldon",
     role: "Project Manager",
-    image: "/mockdata/team/weldon.png",
-    credentials: "PMP, LEED AP"
+    image: "/mockdata/team/Kimwetich Weldon.png",
+    credentials: "CEO,  M.Arch"
   }
 ];
 

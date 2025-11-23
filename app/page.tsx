@@ -44,9 +44,10 @@ export default function Home() {
             <Philosophy />
             <FeaturedProjects />
             <Process />
-            <Services />
-            <Testimonials />
+            {/* <Services /> */}
+
             <StudioSnapshot />
+            <Testimonials />
             <ContactCTA />
           </main>
 
