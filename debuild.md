@@ -128,3 +128,46 @@ export const Timeline: React.FC<TimelineProps> = ({ project }) => {
     </section>
   );
 };
+import React from 'react';
+import { ProjectData } from '../types';
+import { ArrowDown } from 'lucide-react';
+
+interface HeroProps {
+  project: ProjectData;
+}
+
+export const Hero: React.FC<HeroProps> = ({ project }) => {
+  return (
+    <div className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      {/* Background with Parallax feel */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[20s] ease-linear hover:scale-105"
+        style={{ backgroundImage: `url('https://picsum.photos/1920/1080?grayscale')` }}
+      >
+        <div className="absolute inset-0 bg-stone-900/40 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent opacity-80" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center max-w-4xl px-6 animate-fade-in-up">
+        <p className="text-stone-300 tracking-[0.3em] uppercase text-sm mb-4 font-sans">
+          Project No. {project.id.toUpperCase()}
+        </p>
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-6 leading-tight">
+          {project.name}
+        </h1>
+        <div className="flex flex-col items-center gap-2">
+           <span className="h-12 w-[1px] bg-stone-400/50 mb-4"></span>
+           <p className="text-stone-200 font-light text-lg tracking-wide">
+            {project.location} &mdash; Phase II
+          </p>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 animate-bounce">
+        <ArrowDown className="w-6 h-6" />
+      </div>
+    </div>
+  );
+};
