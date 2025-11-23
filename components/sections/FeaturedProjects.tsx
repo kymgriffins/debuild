@@ -91,11 +91,11 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
     setIsHovered(false);
   };
 
-  // Size classes based on prop
+  // Size classes based on prop - INCREASED SIZES
   const sizeClasses = {
-    small: "aspect-[3/4]",
-    medium: "aspect-[4/5]",
-    large: "aspect-[4/3]"
+    small: "aspect-[4/5] min-h-[400px]",    // Taller, minimum height
+    medium: "aspect-[4/3] min-h-[500px]",   // Larger aspect ratio
+    large: "aspect-[16/10] min-h-[600px]"   // Much larger
   };
 
   const layoutClasses = {
@@ -157,7 +157,7 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
               src={imageData.image}
               alt={`${imageData.title} Featured Image`}
               fill
-              className={`object-cover transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'
+              className={`object-cover transition-all duration-1000 filter grayscale ${isLoaded ? 'opacity-100' : 'opacity-0'
                 }`}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               onLoad={() => setIsLoaded(true)}
@@ -381,7 +381,8 @@ export function FeaturedProjects() {
 
         {/* Layout & Filter Controls */}
         <div className="mb-12 space-y-6">
-          <LayoutSelector layout={layout} setLayout={setLayout} />
+          {/* LayoutSelector removed - keeping masonry layout as preferred */}
+          {/* <LayoutSelector layout={layout} setLayout={setLayout} /> */}
 
           {/* Category Filter */}
           <div className="flex justify-center flex-wrap gap-2">
