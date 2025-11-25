@@ -24,21 +24,27 @@ const team = [
     slug: "judy-chesire",
     name: "Judy Chesire",
     role: "Principal Architect",
-    image: "/mockdata/team/Judy Chesire.jpg",
+    image: "/mockdata/team/optimized/judy-chesire-profile.jpg",
+    imageWebp: "/mockdata/team/optimized/judy-chesire-profile.webp",
+    imageAvif: "/mockdata/team/optimized/judy-chesire-profile.avif",
     credentials: "B.Arch , Project Manager "
   },
   {
     slug: "kevin-yegon",
     name: "Kevin Yegon",
     role: "Design Director",
-    image: "/mockdata/team/Kevin Yegon.png",
+    image: "/mockdata/team/optimized/kevin-yegon-profile.jpg",
+    imageWebp: "/mockdata/team/optimized/kevin-yegon-profile.webp",
+    imageAvif: "/mockdata/team/optimized/kevin-yegon-profile.avif",
     credentials: "B.Arch, BIM Specialist"
   },
   {
     slug: "kimwetich-weldon",
     name: "Kimwetich Weldon",
     role: "Project Manager",
-    image: "/mockdata/team/Kimwetich Weldon.png",
+    image: "/mockdata/team/optimized/kimwetich-weldon-profile.jpg",
+    imageWebp: "/mockdata/team/optimized/kimwetich-weldon-profile.webp",
+    imageAvif: "/mockdata/team/optimized/kimwetich-weldon-profile.avif",
     credentials: "CEO,  M.Arch"
   }
 ];
@@ -109,7 +115,7 @@ export function StudioSnapshot() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="bg-card rounded-xl p-4 shadow-xl border"
+                    className="bg-white rounded-xl p-4 shadow-xl border"
                   >
                     <div className="text-2xl font-bold text-primary">{stat.value}</div>
                     <div className="text-xs text-muted-foreground">{stat.label}</div>
@@ -171,7 +177,11 @@ export function StudioSnapshot() {
                         <CardContent className="p-4">
                           <div className="flex items-center space-x-4">
                             <Avatar className="w-12 h-12">
-                              <AvatarImage src={member.image} alt={member.name} />
+                              <AvatarImage
+                                src={member.image}
+                                alt={member.name}
+                                srcSet={`${member.imageAvif} 1x, ${member.imageWebp} 1x, ${member.image} 1x`}
+                              />
                               <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                             </Avatar>
                             <div className="flex-1">

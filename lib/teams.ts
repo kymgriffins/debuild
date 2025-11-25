@@ -40,7 +40,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
     bio: "Architect specializing in context-driven design, sustainability, and human-centered spatial planning.",
     longBio:
       "Judy is an architect driven by the belief that well-considered design improves how people live, work, and interact with space. She graduated with a Bachelor of Architecture from the Technical University of Mombasa in 2022. Since then, she has worked across residential, commercial, and small institutional projects, focusing on sustainable building strategies and community-minded architecture. Her approach combines research, material sensitivity, and client collaboration to develop solutions that are functional, enduring, and culturally aligned. Judy’s contributions have shaped the studio’s design philosophy, and she has been a key part of the successful delivery of more than 21 built and ongoing projects.",
-    image: "/mockdata/team/Judy Chesire.jpg",
+    image: "/mockdata/team/optimized/judy-chesire-hero.jpg",
     credentials: "B.Arch",
     experience: "5 years",
     specializations: [
@@ -113,7 +113,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
     bio: "Architect and visualization specialist focused on translating ideas into expressive visual narratives.",
     longBio:
       "Kevin graduated with a Bachelor of Architecture from the Technical University of Mombasa in 2023. He leads visualization and spatial design, bringing concepts to life through precise drawings, 3D modeling, rendering, and digital simulations. His strengths lie in interior detailing, visual storytelling, and translating user needs into thoughtful spatial arrangements. Kevin ensures that each project is clearly communicated to clients through immersive visual outputs, playing a central role in the delivery of more than 21 collective studio projects.",
-    image: "/mockdata/team/Kevin Yegon.png",
+    image: "/mockdata/team/optimized/kevin-yegon-hero.jpg",
     credentials: "B.Arch",
     experience: "5 years",
     specializations: [
@@ -185,7 +185,7 @@ export const teamMembers: Record<string, TeamMemberData> = {
     bio: "Architect overseeing project coordination, client communication, timelines, and execution.",
     longBio:
       "Weldon graduated with a Bachelor of Architecture from Kenyatta University in 2022 and is currently pursuing a Master's degree. His role blends architectural design with project management, ensuring that concepts progress efficiently from drawings to site. Weldon coordinates consultants, manages client expectations, prepares documentation, and leads site follow-ups. His structured approach and attention to detail have helped the team successfully deliver over 21 collaborative projects. His ongoing postgraduate studies strengthen his technical, managerial, and research capabilities.",
-    image: "/mockdata/team/Kimwetich Weldon.png",
+    image: "/mockdata/team/optimized/kimwetich-weldon-hero.jpg",
     credentials: "B.Arch, M.Arch (ongoing)",
     experience: "6 years",
     specializations: [

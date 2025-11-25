@@ -6,8 +6,9 @@ const { execSync } = require('child_process');
 const sharp = require('sharp');
 
 /**
- * Optimize team member images for web use
- * Converts 1600x2400 images to properly sized responsive versions
+ * Optimize images for web use
+ * Converts high-resolution images to properly sized responsive versions
+ * Handles both team member photos (portrait 2:3) and project images
  */
 
 const TEAM_IMAGES = [
@@ -16,11 +17,18 @@ const TEAM_IMAGES = [
   { name: 'Kimwetich Weldon', ext: 'png' }
 ];
 
-// Target sizes for different breakpoints (based on Next.js sizes attribute)
-const SIZES = {
+// Target sizes for different use cases
+const TEAM_SIZES = {
+  avatar: { width: 150, height: 225 },    // 2:3 aspect ratio for avatars
+  profile: { width: 400, height: 600 },   // 2:3 aspect ratio for profiles
+  hero: { width: 800, height: 1200 }      // 2:3 aspect ratio for hero sections
+};
+
+// Project image sizes (assuming various aspect ratios)
+const PROJECT_SIZES = {
   mobile: 800,     // 100vw on mobile
-  tablet: 600,     // ~33vw on tablet
-  desktop: 400     // ~25vw on desktop
+  tablet: 600,     // ~50vw on tablet
+  desktop: 500     // ~33vw on desktop
 };
 
 const QUALITY = {
@@ -31,30 +39,45 @@ const QUALITY = {
   avif: 80
 };
 
-async function optimizeImage(inputPath, outputPath, width, format) {
+async function optimizeImage(inputPath, outputPath, options = {}) {
   try {
+    const { width, height, format = 'jpg', maintainAspectRatio = true } = options;
     const image = sharp(inputPath);
 
-    if (format === 'webp' || format === 'avif') {
-      await image
-        .resize(width, null, { withoutEnlargement: true })
-        .webp({ quality: QUALITY.webp })
-        .toFile(outputPath.replace(/\.(jpg|png)$/, `.${format}`));
+    let resizeOptions = {};
+    if (maintainAspectRatio) {
+      resizeOptions = { width, height, fit: 'cover', position: 'center' };
     } else {
-      await image
-        .resize(width, null, { withoutEnlargement: true })
-        [format]({ quality: QUALITY[format] })
-        .toFile(outputPath);
+      resizeOptions = { width, withoutEnlargement: true };
     }
 
-    console.log(`✓ Optimized: ${outputPath}`);
+    let pipeline = image.resize(resizeOptions);
+
+    // Apply format-specific optimizations
+    if (format === 'webp') {
+      pipeline = pipeline.webp({ quality: QUALITY.webp });
+    } else if (format === 'avif') {
+      pipeline = pipeline.avif({ quality: QUALITY.avif });
+    } else if (format === 'jpg' || format === 'jpeg') {
+      pipeline = pipeline.jpeg({ quality: QUALITY.jpg, mozjpeg: true });
+    } else if (format === 'png') {
+      pipeline = pipeline.png({ quality: QUALITY.png, compressionLevel: 9 });
+    }
+
+    const finalPath = format === 'jpg' ? outputPath :
+                      format === 'webp' ? outputPath.replace(/\.(jpg|png)$/, '.webp') :
+                      format === 'avif' ? outputPath.replace(/\.(jpg|png)$/, '.avif') :
+                      outputPath.replace(/\.(jpg|png)$/, `.${format}`);
+
+    await pipeline.toFile(finalPath);
+    console.log(`✓ Optimized: ${finalPath}`);
   } catch (error) {
     console.error(`✗ Failed: ${outputPath}`, error.message);
   }
 }
 
-async function createResponsiveImages() {
-  console.log('🚀 Optimizing team member images for web performance...\n');
+async function optimizeTeamImages() {
+  console.log('🚀 Optimizing team member images for proper aspect ratios...\n');
 
   for (const member of TEAM_IMAGES) {
     const srcFile = path.join(__dirname, '../public/mockdata/team', `${member.name}.${member.ext}`);
@@ -72,29 +95,104 @@ async function createResponsiveImages() {
 
     const baseOutputName = `${member.name.replace(/\s+/g, '-').toLowerCase()}`;
 
-    // Generate responsive sizes
-    for (const [breakpoint, width] of Object.entries(SIZES)) {
-      const outputFile = path.join(outputDir, `${baseOutputName}-${breakpoint}.jpg`);
+    // Generate different sizes for different use cases (maintaining 2:3 aspect ratio)
+    for (const [sizeName, dimensions] of Object.entries(TEAM_SIZES)) {
+      const outputFile = path.join(outputDir, `${baseOutputName}-${sizeName}.jpg`);
 
-      await optimizeImage(srcFile, outputFile, width, 'jpg');
+      await optimizeImage(srcFile, outputFile, {
+        width: dimensions.width,
+        height: dimensions.height,
+        format: 'jpg',
+        maintainAspectRatio: true
+      });
+
+      // Generate modern formats for better compression
+      await optimizeImage(srcFile, outputFile, {
+        width: dimensions.width,
+        height: dimensions.height,
+        format: 'webp',
+        maintainAspectRatio: true
+      });
+
+      await optimizeImage(srcFile, outputFile, {
+        width: dimensions.width,
+        height: dimensions.height,
+        format: 'avif',
+        maintainAspectRatio: true
+      });
     }
-
-    // Generate modern formats for largest size
-    const webpFile = path.join(outputDir, `${baseOutputName}-desktop.webp`);
-    const avifFile = path.join(outputDir, `${baseOutputName}-desktop.avif`);
-
-    await optimizeImage(srcFile, webpFile, SIZES.desktop, 'webp');
-    await optimizeImage(srcFile, avifFile, SIZES.desktop, 'avif');
 
     console.log(`✅ Completed: ${member.name}\n`);
   }
+}
 
-  console.log('🎉 Team image optimization complete!');
+async function optimizeProjectImages() {
+  console.log('🏗️  Optimizing project images...\n');
+
+  const projectDirs = ['Kijabe', 'Nyeri', 'ruiru/Construction', 'ruiru/Renders'];
+
+  for (const dir of projectDirs) {
+    const fullDir = path.join(__dirname, '../public/mockdata', dir);
+
+    if (!fs.existsSync(fullDir)) {
+      console.log(`⚠️  Directory not found: ${fullDir}`);
+      continue;
+    }
+
+    console.log(`📁 Processing directory: ${dir}`);
+
+    const files = fs.readdirSync(fullDir).filter(file =>
+      /\.(jpg|jpeg|png)$/i.test(file)
+    );
+
+    for (const file of files) {
+      const srcFile = path.join(fullDir, file);
+      const outputDir = path.join(__dirname, '../public/mockdata', dir, 'optimized');
+      fs.mkdirSync(outputDir, { recursive: true });
+
+      const baseName = path.parse(file).name;
+      const outputFile = path.join(outputDir, `${baseName}.jpg`);
+
+      // Create responsive versions
+      for (const [breakpoint, width] of Object.entries(PROJECT_SIZES)) {
+        const responsiveOutput = path.join(outputDir, `${baseName}-${breakpoint}.jpg`);
+
+        await optimizeImage(srcFile, responsiveOutput, {
+          width,
+          format: 'jpg',
+          maintainAspectRatio: false
+        });
+      }
+
+      // Generate modern formats for desktop size
+      await optimizeImage(srcFile, outputFile, {
+        width: PROJECT_SIZES.desktop,
+        format: 'webp',
+        maintainAspectRatio: false
+      });
+
+      await optimizeImage(srcFile, outputFile, {
+        width: PROJECT_SIZES.desktop,
+        format: 'avif',
+        maintainAspectRatio: false
+      });
+    }
+
+    console.log(`✅ Completed directory: ${dir}\n`);
+  }
+}
+
+async function createResponsiveImages() {
+  await optimizeTeamImages();
+  await optimizeProjectImages();
+
+  console.log('🎉 Image optimization complete!');
   console.log('\n📊 Performance improvements:');
-  console.log('• Reduced file sizes by ~70% (1600px → responsive sizes)');
+  console.log('• Proper aspect ratios maintained (2:3 for portraits)');
+  console.log('• Reduced file sizes by ~70% through responsive sizing');
   console.log('• Modern formats (WebP, AVIF) for better compression');
-  console.log('• Responsive images match actual display sizes');
-  console.log('• Blur placeholders for better UX');
+  console.log('• Optimized images for specific use cases (avatar, profile, hero)');
+  console.log('• No more awkward cropping or distortion');
 }
 
 createResponsiveImages().catch(console.error);

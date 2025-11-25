@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { SlideUp } from "@/components/motion/SlideUp";
 import { LineSweep } from "@/components/motion/LineSweep";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
@@ -16,7 +15,6 @@ import {
   Home,
   Building,
   Ruler,
-  DollarSign,
   Clock,
   CheckCircle,
   ArrowRight,
@@ -120,7 +118,7 @@ export default function DebuildBasicCalculatorPage() {
 
   const selectedRoomData = getRoomData();
   const selectedFinishing = finishingOptions.find(f => f.id === finishingLevel) || finishingOptions[1];
-  const totalEstimate = Math.round(selectedRoomData.basePrice * selectedFinishing.multiplier);
+  const totalEstimate = selectedRoomData && selectedFinishing ? Math.round(selectedRoomData.basePrice * selectedFinishing.multiplier) : 0;
 
   const calculateTimeline = () => {
     const finishingMultiplier = {

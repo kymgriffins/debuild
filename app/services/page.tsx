@@ -232,14 +232,7 @@ export default function ServicesPage() {
                     {/* Service Badge */}
                     {service.badge && (
                       <div className="absolute -top-3 left-6 z-10">
-                        <Badge className={`${
-                          service.badge === 'AI-Powered' ? 'bg-gradient-to-r from-blue-500 to-purple-500' :
-                          service.badge === 'Sustainable Focus' ? 'bg-gradient-to-r from-green-500 to-emerald-500' :
-                          service.badge === 'Best Value' ? 'bg-gradient-to-r from-orange-500 to-red-500' :
-                          service.badge === 'Luxury Experience' ? 'bg-gradient-to-r from-yellow-500 to-amber-500' :
-                          service.badge === 'No Surprises' ? 'bg-gradient-to-r from-indigo-500 to-blue-500' :
-                          'bg-primary'
-                        } text-white px-3 py-1 text-xs font-medium`}>
+                        <Badge className="bg-primary text-primary-foreground px-3 py-1 text-xs font-medium">
                           {service.badge}
                         </Badge>
                       </div>
@@ -306,7 +299,7 @@ export default function ServicesPage() {
 
                       {/* Urgency Badge */}
                       <div className="text-center">
-                        <Badge variant="outline" className="text-xs border-orange-200 text-orange-700">
+                        <Badge variant="outline" className="text-xs">
                           ⚡ Act before Q1 fills up
                         </Badge>
                       </div>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { PageTransition } from "@/components/motion/PageTransition";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -9,8 +11,66 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: {
+    default: "Debuild Architecture - Crafting Spaces That Inspire",
+    template: "%s | Debuild Architecture"
+  },
+  description: "Award-winning architectural design firm specializing in residential, commercial, and sustainable building projects. Transform your vision into reality with Kenya's premier architects.",
+  keywords: ["architecture", "architectural design", "residential", "commercial", "sustainable building", "kenya architecture", "building design"],
+  authors: [{ name: "Debuild Architecture Team" }],
+  creator: "Debuild Architecture",
+  publisher: "Debuild Architecture",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: defaultUrl,
+    title: "Debuild Architecture - Crafting Spaces That Inspire",
+    description: "Award-winning architectural design firm specializing in residential, commercial, and sustainable building projects.",
+    siteName: "Debuild Architecture",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Debuild Architecture",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Debuild Architecture - Crafting Spaces That Inspire",
+    description: "Award-winning architectural design firm specializing in residential, commercial, and sustainable building projects.",
+    images: ["/twitter-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 const geistSans = Geist({
@@ -36,7 +96,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ErrorBoundary>
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </ErrorBoundary>
         </ThemeProvider>
       </body>
     </html>

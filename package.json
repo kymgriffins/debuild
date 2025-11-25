@@ -5,7 +5,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "optimize-images": "node scripts/optimize-team-images.js"
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit",
+    "optimize-images": "node scripts/optimize-team-images.js",
+    "preview": "next build && next start",
+    "clean": "rm -rf .next out node_modules/.cache",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.11",
@@ -21,6 +26,7 @@
     "@tailwindcss/postcss": "^4.1.17",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "critters": "^0.0.23",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.554.0",
     "next": "latest",
@@ -32,14 +38,19 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@eslint/js": "^9.39.1",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
     "autoprefixer": "^10.4.22",
     "eslint": "^9",
-    "eslint-config-next": "16.0.3",
+    "eslint-config-next": "^16.0.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "postcss": "^8.5.6",
-    "sharp": "^0.33.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.1.17",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"

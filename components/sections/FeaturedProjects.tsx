@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { SlideUp } from "@/components/motion/SlideUp";
 import { LineSweep } from "@/components/motion/LineSweep";
+import { ResponsiveImage } from "@/components/ui/responsive-image";
 import { getAllProjects } from "@/lib/projects";
 
 const projects = getAllProjects();
@@ -92,11 +93,11 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
     setIsHovered(false);
   };
 
-  // Size classes based on prop - INCREASED SIZES
+  // Size classes based on prop - PROPER ASPECT RATIOS FOR 2:3 IMAGES
   const sizeClasses = {
-    small: "aspect-[4/5] min-h-[400px]",    // Taller, minimum height
-    medium: "aspect-[4/3] min-h-[500px]",   // Larger aspect ratio
-    large: "aspect-[16/10] min-h-[600px]"   // Much larger
+    small: "aspect-[2/3] min-h-[400px]",    // Natural 2:3 portrait ratio
+    medium: "aspect-[2/3] min-h-[500px]",   // Natural 2:3 portrait ratio
+    large: "aspect-[2/3] min-h-[600px]"     // Natural 2:3 portrait ratio
   };
 
   const layoutClasses = {
@@ -155,15 +156,15 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
             animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" as const }}
           >
-            <Image
+            <ResponsiveImage
               src={imageData.image}
               alt={`${imageData.title} Featured Image`}
               fill
-              className={`object-cover transition-all duration-1000 filter grayscale ${isLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
+              className={`object-cover transition-all duration-1000 filter grayscale ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              onLoad={() => setIsLoaded(true)}
               priority={index < 3}
+              onLoad={() => setIsLoaded(true)}
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAoACgDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMEB//EACUQAAIBAwMEAwEBAAAAAAAAAAECAwAEEQUSITFBURNhcZEigf/EABUBAFEAAAAAAAAAAAAAAAAAAAH/xAAVEQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEQMRAD8A4+iiigAooooAKKKKACiiigD/2Q=="
             />
 
             {/* Loading skeleton */}
@@ -236,11 +237,11 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
                   </span>
                 </div>
 
-                <span className={`px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md border ${imageData.status === 'Completed'
-                    ? 'bg-green-500/20 text-green-300 border-green-500/30'
+                <span className={`px-3 py-1.5 rounded-full text-xs font-medium border ${imageData.status === 'Completed'
+                    ? 'bg-green-600 text-white border-green-600'
                     : imageData.status === 'Under Construction'
-                      ? 'bg-blue-500/20 text-blue-300 border-blue-500/30'
-                      : 'bg-gray-500/20 text-gray-300 border-gray-500/30'
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-gray-600 text-white border-gray-600'
                   }`}>
                   {imageData.status}
                 </span>
@@ -251,7 +252,7 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
           {/* Top badges with enhanced animations */}
           <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-10">
             <motion.div
-              className="bg-black/80 backdrop-blur-md rounded-xl px-3 py-2 text-sm text-white border border-white/20"
+              className="bg-white/95 backdrop-blur-md rounded-xl px-3 py-2 text-sm text-gray-900 border border-white/50 shadow-lg"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={isHovered ? {
                 scale: 1.05,
@@ -268,7 +269,7 @@ function ImageCard({ imageData, index, layout, size = "medium" }: ImageCardProps
             </motion.div>
 
             <motion.div
-              className="bg-black/80 backdrop-blur-md rounded-lg px-2 py-1 text-xs text-white"
+              className="bg-white/95 backdrop-blur-md rounded-lg px-2 py-1 text-xs text-gray-900 shadow-lg"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={isHovered ? {
                 scale: 1.05,
