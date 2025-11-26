@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { NewsletterSignup } from "@/components/sections/NewsletterSignup";
 
 const footerNavigation = [
   { title: "Home", url: "/" },
@@ -108,19 +109,7 @@ export function Footer() {
 
             {/* Newsletter Signup */}
             <div className="mt-6">
-              <p className="text-xs text-muted-foreground mb-3">
-                Stay updated with our latest projects
-              </p>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Enter email"
-                  className="flex-1 px-3 py-2 text-sm bg-muted border border-border rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-                <button className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded-r-md hover:bg-primary/90 transition-colors">
-                  Subscribe
-                </button>
-              </div>
+              <NewsletterSignup />
             </div>
           </div>
         </div>

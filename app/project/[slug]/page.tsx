@@ -9,9 +9,9 @@ import { getProjectBySlug, getAllProjectSlugs } from "@/lib/projects";
 
 // Generate static params for all project slugs
 export async function generateStaticParams() {
-  const slugs = getAllProjectSlugs();
+  const slugs = await getAllProjectSlugs();
 
-  return slugs.map((slug) => ({
+  return slugs.map((slug: string) => ({
     slug: slug,
   }));
 }
@@ -24,7 +24,7 @@ interface ProjectPageProps {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();

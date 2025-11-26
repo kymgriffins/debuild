@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Allow cross-origin requests from development network IPs
+  allowedDevOrigins: ["192.168.100.91"],
+
   // Enable experimental features for better performance (2025 features)
   experimental: {
     optimizePackageImports: ["@radix-ui/react-avatar", "@radix-ui/react-dropdown-menu", "@radix-ui/react-select"],

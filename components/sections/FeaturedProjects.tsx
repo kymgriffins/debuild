@@ -7,25 +7,22 @@ import { useState, useRef, useEffect } from "react";
 import { SlideUp } from "@/components/motion/SlideUp";
 import { LineSweep } from "@/components/motion/LineSweep";
 import { ResponsiveImage } from "@/components/ui/responsive-image";
-import { getAllProjects } from "@/lib/projects";
+import { getAllProjects, type ProjectData } from "@/lib/projects";
 
-const projects = getAllProjects();
-
-// Create featured images with enhanced data
-const featuredImages = projects.map(project => ({
-  image: project.images[0],
-  title: project.title,
-  category: project.category,
-  projectId: project.id,
-  location: project.location,
-  description: project.description,
-  year: project.year,
-  status: project.status,
-  aspectRatio: Math.random() > 0.5 ? "landscape" : "portrait" // Dynamic aspect ratios
-}));
+interface FeaturedImage {
+  image: string;
+  title: string;
+  category: string;
+  projectId: string;
+  location: string;
+  description: string;
+  year: string;
+  status: string;
+  aspectRatio: "landscape" | "portrait";
+}
 
 interface ImageCardProps {
-  imageData: typeof featuredImages[0];
+  imageData: FeaturedImage;
   index: number;
   layout: "masonry" | "grid" | "featured";
   size?: "small" | "medium" | "large";
@@ -352,6 +349,37 @@ function LayoutSelector({ layout, setLayout }: {
 export function FeaturedProjects() {
   const [layout, setLayout] = useState<"masonry" | "grid" | "featured">("masonry");
   const [filter, setFilter] = useState("all");
+  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch projects on mount
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const projectData = await getAllProjects();
+        setProjects(projectData);
+      } catch (error) {
+        console.error('Failed to fetch projects:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  // Create featured images with enhanced data
+  const featuredImages = projects.map(project => ({
+    image: project.images[0],
+    title: project.title,
+    category: project.category,
+    projectId: project.id,
+    location: project.location,
+    description: project.description,
+    year: project.year,
+    status: project.status,
+    aspectRatio: (Math.random() > 0.5 ? "landscape" : "portrait") as "landscape" | "portrait"
+  }));
 
   // Filter projects by category
   const filteredImages = filter === "all"
@@ -360,6 +388,38 @@ export function FeaturedProjects() {
 
   // Get unique categories for filter
   const categories = ["all", ...new Set(featuredImages.map(img => img.category))];
+
+  if (isLoading) {
+    return (
+      <section id="work" className="py-20 lg:py-28 bg-white relative overflow-hidden">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#f0f0f0_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <LineSweep className="mb-8" />
+            <SlideUp>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mb-6 text-gray-900">
+                Our Portfolio
+              </h2>
+            </SlideUp>
+            <SlideUp delay={0.2}>
+              <p className="max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed">
+                Discover our architectural journey through innovative designs, sustainable solutions,
+                and spaces that inspire. Each project tells a unique story of creativity and precision.
+              </p>
+            </SlideUp>
+          </div>
+
+          {/* Loading skeleton */}
+          <div className="flex justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-800"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="work" className="py-20 lg:py-28 bg-white relative overflow-hidden">

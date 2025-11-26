@@ -1,18 +1,35 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getAllTeamMembers } from "@/lib/teams";
+import { getAllTeamMembers, TeamMemberDataWithLongBio } from "@/lib/teams";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { LineSweep } from "@/components/motion/LineSweep";
 import { NavBar } from "@/components/layout/NavBar";
 
 export default function TeamPage() {
-  const teamMembers = getAllTeamMembers();
+  const [teamMembers, setTeamMembers] = useState<TeamMemberDataWithLongBio[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTeamMembers = async () => {
+      try {
+        const members = await getAllTeamMembers();
+        setTeamMembers(members);
+      } catch (error) {
+        console.error('Error fetching team members:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeamMembers();
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -41,8 +58,14 @@ export default function TeamPage() {
       {/* Team Members Grid */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-6 lg:px-20">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {teamMembers && teamMembers.length > 0 ? teamMembers.map((member, index) => (
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-muted-foreground">Loading team members...</p>
+            </div>
+          ) : (
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {teamMembers && teamMembers.length > 0 ? teamMembers.map((member, index) => (
               <motion.div
                 key={member.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -116,6 +139,7 @@ export default function TeamPage() {
               </motion.div>
             )) : null}
           </div>
+          )}
         </div>
       </section>
 

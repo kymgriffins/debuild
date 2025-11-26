@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SlideUp } from "@/components/motion/SlideUp";
@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Calendar, MapPin, Ruler, Building } from "lucide-react";
-import { getAllProjects } from "@/lib/projects";
+import { getAllProjects, ProjectData } from "@/lib/projects";
 
 // Monochrome theme - no color accents
 const categoryColors = {
@@ -21,8 +21,24 @@ const categoryColors = {
 };
 
 export default function ProjectsPage() {
-  const projects = getAllProjects();
+  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const fetchedProjects = await getAllProjects();
+        setProjects(fetchedProjects);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const categories = ["all", ...new Set(projects.map(p => p.category))];
   const filteredProjects = selectedCategory === "all"
@@ -68,7 +84,13 @@ export default function ProjectsPage() {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-muted-foreground">Loading projects...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project, index) => (
               <SlideUp key={project.id} delay={0.1 * index}>
                 <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300">
@@ -142,6 +164,7 @@ export default function ProjectsPage() {
               </SlideUp>
             ))}
           </div>
+          )}
         </section>
 
         {/* Stats Section */}

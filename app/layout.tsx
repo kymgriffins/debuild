@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { Analytics } from "@/components/analytics/Analytics";
+import { Toaster } from "@/components/ui/toaster";
+import { Suspense } from "react";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -66,11 +69,12 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 const geistSans = Geist({
@@ -100,6 +104,10 @@ export default function RootLayout({
             <PageTransition>
               {children}
             </PageTransition>
+            <Suspense fallback={null}>
+              <Analytics />
+            </Suspense>
+            <Toaster />
           </ErrorBoundary>
         </ThemeProvider>
       </body>

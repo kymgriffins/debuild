@@ -173,7 +173,7 @@ export function TeamMemberContent({
     role,
     credentials,
     image,
-    longBio,
+    long_bio,
     bio,
     experience_years,
     projects_completed,
@@ -253,7 +253,7 @@ export function TeamMemberContent({
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Biography</h2>
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-              {longBio || bio}
+              {long_bio || bio}
             </p>
           </div>
         </section>
