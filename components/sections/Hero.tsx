@@ -1,62 +1,98 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 
 export function Hero() {
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const scale = useTransform(scrollY, [0, 300], [1, 1.2]);
+
   return (
-    <section className="min-h-screen flex flex-col justify-center bg-white">
-      {/* Main Content */}
-      <div className="container mx-auto px-6 lg:px-20 flex flex-col items-center justify-center text-center">
-        {/* Headline */}
-        <div className="space-y-8 max-w-4xl">
-          <motion.h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-tight text-black"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            Architectural Design
-          </motion.h1>
+    <motion.section
+      className="sticky top-0 h-screen w-full overflow-hidden bg-black z-10"
+      style={{ opacity }}
+    >
+      {/* Background Image with Parallax */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ scale }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
+        <img
+          src="/hero-architecture.jpg"
+          alt="Modern architecture"
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
 
-          <motion.p
-            className="text-xl sm:text-2xl text-black leading-relaxed max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          >
-            Crafting spaces that tell stories. Building environments that inspire.
-          </motion.p>
-        </div>
-
-        {/* CTA */}
-        <motion.div
-          className="mt-12"
-          initial={{ opacity: 0, y: 20 }}
+      {/* Content */}
+      <div className="relative h-full flex flex-col items-center justify-center px-6 text-center">
+        <motion.h1
+          className="text-white text-7xl md:text-8xl lg:text-9xl font-semibold tracking-tight mb-6"
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Button
-            size="lg"
-            className="px-8 py-4 text-lg bg-black hover:bg-gray-800 text-white border-0"
-          >
-            Explore Our Work
-          </Button>
+          Crafting Spaces
+          <br />
+          <span className="text-white/80">That Inspire</span>
+        </motion.h1>
+
+        <motion.p
+          className="text-white/70 text-xl md:text-2xl max-w-2xl mb-12 font-light"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Award-winning architectural design firm in Kenya
+          <br />
+          transforming visions into timeless reality
+        </motion.p>
+
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <AppleButton primary>Explore Projects</AppleButton>
+          <AppleButton>Start Your Project</AppleButton>
         </motion.div>
 
-        {/* Subtle scroll hint */}
+        {/* Scroll Indicator */}
         <motion.div
-          className="mt-24 flex flex-col items-center space-y-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="w-px h-8 bg-black" />
-          <span className="text-sm text-black tracking-wide">
-            Scroll
-          </span>
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+            <motion.div
+              className="w-1.5 h-1.5 bg-white rounded-full"
+              animate={{ y: [0, 16, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
+
+// Apple-style Button Component
+const AppleButton = ({ children, primary = false }: { children: React.ReactNode; primary?: boolean }) => (
+  <motion.button
+    className={`
+      px-8 py-4 rounded-full text-lg font-medium
+      transition-all duration-300
+      ${primary
+        ? 'bg-white text-black hover:bg-white/90'
+        : 'bg-white/10 text-white border border-white/20 hover:bg-white/20 backdrop-blur-xl'
+      }
+    `}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.98 }}
+  >
+    {children}
+  </motion.button>
+);

@@ -1,13 +1,13 @@
 // Simple directory route to show all team members
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { getAllTeamMembers } from "@/lib/teams";
-import { ArrowRight, Users } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function TeamDirectory() {
   const teamMembers = getAllTeamMembers();
@@ -33,7 +33,7 @@ export default function TeamDirectory() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <Badge className="absolute top-4 right-4">{member.credentials}</Badge>

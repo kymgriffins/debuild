@@ -22,45 +22,88 @@ export default {
     },
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
+        border: "#E5E5E7", // Apple's subtle border color
+        input: "#F2F2F7", // Light input background
+        ring: "#007AFF", // Apple's blue accent
+        background: "#FFFFFF", // Pure white background
+        foreground: "#1D1D1F", // Apple's dark text
+
+        // Primary - Apple's blue
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#007AFF",
+          foreground: "#FFFFFF",
+          hover: "#0051D5", // Slightly darker blue for hover
         },
+
+        // Secondary - Clean grayscale
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#F2F2F7",
+          foreground: "#1D1D1F",
         },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
+
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "#FF3B30", // Apple's red
+          foreground: "#FFFFFF",
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+
+        muted: {
+          DEFAULT: "#F9F9F9",
+          foreground: "#86868B",
+        },
+
+        accent: {
+          DEFAULT: "#007AFF",
+          foreground: "#FFFFFF",
+        },
+
+        popover: {
+          DEFAULT: "#FFFFFF",
+          foreground: "#1D1D1F",
+        },
+
+        card: {
+          DEFAULT: "#FFFFFF",
+          foreground: "#1D1D1F",
+          border: "#E5E5E7",
+        },
+
+        // Apple-inspired additional colors
+        apple: {
+          gray: {
+            100: "#FCFCFC",
+            200: "#F2F2F7",
+            300: "#E5E5E7",
+            400: "#D1D1D6",
+            500: "#86868B",
+            600: "#1D1D1F",
+          },
+          blue: {
+            400: "#007AFF",
+            500: "#0051D5",
+            600: "#003BA6",
+          },
+          red: {
+            500: "#FF3B30",
+          },
+          green: {
+            500: "#28CD41",
+          },
+        },
+
+        // Section backgrounds
+        section: {
+          white: "#FFFFFF",
+          light: "#F9F9F9",
+          dark: "#1D1D1F",
+        },
+
+        // Text colors
+        text: {
+          primary: "#1D1D1F", // Dark charcoal
+          secondary: "#424245", // Medium gray
+          tertiary: "#86868B", // Light gray
+          inverse: "#FFFFFF", // White for dark backgrounds
+          accent: "#007AFF", // Blue accent
         },
       },
       borderRadius: {

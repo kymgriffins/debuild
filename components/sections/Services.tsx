@@ -1,216 +1,127 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { StaggerChildren } from "@/components/motion/StaggerChildren";
-import { LineSweep } from "@/components/motion/LineSweep";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Building,
-  Home,
-  Palette,
-  Zap,
-  Wrench,
-  Eye,
-  ArrowRight,
-  Star,
-  CheckCircle,
-  Crown,
-  Sparkles,
-  TreePine,
-  FileCheck,
-  DollarSign,
-  TrendingUp
-} from "lucide-react";
 
-const servicePillars = [
+type Service = {
+  icon: string;
+  title: string;
+  description: string;
+  features: string[];
+};
+
+const services: Service[] = [
   {
-    icon: Building,
-    title: "Architecture",
-    subtitle: "Visual & Functional Design",
-    description: "Complete architectural design services from concept to construction documentation.",
-    features: [
-      "Concept design & floor plans",
-      "Elevations & façade development",
-      "3D visualization & walkthroughs",
-      "Material & finish specifications",
-      "Construction documentation",
-      "Permit coordination"
-    ],
-    popular: false
+    icon: '🏠',
+    title: 'Residential Design',
+    description: 'Custom homes that reflect your lifestyle and aspirations',
+    features: ['Villa Design', 'Apartment Layouts', 'Interior Architecture']
   },
   {
-    icon: Zap,
-    title: "Engineering",
-    subtitle: "Structural & MEP Systems",
-    description: "Comprehensive engineering solutions ensuring safety, functionality, and compliance.",
-    features: [
-      "Structural design & load calculations",
-      "MEP systems (HVAC, Electrical, Plumbing)",
-      "Energy efficiency consulting",
-      "Building safety verification",
-      "Compliance documentation",
-      "Inspection preparation"
-    ],
-    popular: true
+    icon: '🏢',
+    title: 'Commercial Projects',
+    description: 'Functional spaces that drive business success',
+    features: ['Office Complexes', 'Retail Spaces', 'Mixed-Use Development']
   },
   {
-    icon: Home,
-    title: "Interiors",
-    subtitle: "Space Experience Design",
-    description: "Detailed interior architecture that transforms spaces into remarkable experiences.",
-    features: [
-      "Furniture & space planning",
-      "Interior material selection",
-      "Lighting scene design",
-      "Cabinetry & joinery drawings",
-      "Interior finishing schedules",
-      "360° preview experiences"
-    ],
-    popular: false
-  },
-  {
-    icon: TreePine,
-    title: "Outdoor & Landscape",
-    subtitle: "Environmental Integration",
-    description: "Complete outdoor design integrating buildings with their natural surroundings.",
-    features: [
-      "Landscaping & softscape design",
-      "Hardscape & outdoor structures",
-      "Irrigation & drainage systems",
-      "Garden lighting & features",
-      "Sustainable outdoor solutions",
-      "Environmental integration"
-    ],
-    popular: false
-  },
-  {
-    icon: TrendingUp,
-    title: "Project Delivery",
-    subtitle: "Management & Delivery",
-    description: "End-to-end project management ensuring seamless delivery from design to completion.",
-    features: [
-      "Full project lifecycle management",
-      "Cost estimation & BOQ development",
-      "Timeline tracking & milestones",
-      "Quality control & inspections",
-      "Client progress reporting",
-      "Post-construction support"
-    ],
-    popular: false
+    icon: '🌿',
+    title: 'Sustainable Architecture',
+    description: 'Eco-conscious designs for a better tomorrow',
+    features: ['Green Building', 'Energy Efficiency', 'LEED Certification']
   }
 ];
 
-export function Services() {
+const Services = () => {
+
   return (
-    <section className="py-24 lg:py-32 bg-muted/30">
-      <div className="container mx-auto px-6 lg:px-20">
-        {/* Header */}
+    <section className="py-32 bg-neutral-50">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-16 lg:mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <LineSweep />
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mt-6 mb-4">
+          <h2 className="text-6xl lg:text-7xl font-semibold mb-6 tracking-tight">
             Our Services
           </h2>
-          <p className="text-lg text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">
-            Comprehensive architectural solutions tailored to bring your vision to life, from initial concept through construction completion.
+          <p className="text-xl text-black/60 max-w-2xl mx-auto font-light">
+            Comprehensive architectural solutions tailored to your vision
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <StaggerChildren
-          className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10"
-          staggerDelay={0.1}
-        >
-          {servicePillars.map((pillar, index) => (
-            <motion.div
-              key={pillar.title}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Card className="relative h-full group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-card/50 backdrop-blur-sm">
-                {/* Popular Badge */}
-                {pillar.popular && (
-                  <div className="absolute -top-4 left-8 z-10">
-                    <Badge className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-4 py-2 text-sm font-medium shadow-md">
-                      <Crown className="w-4 h-4 mr-2" />
-                      Most Comprehensive
-                    </Badge>
-                  </div>
-                )}
-
-                <CardHeader className="pb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-6 group-hover:from-primary/30 group-hover:to-primary/20 transition-all duration-300 shadow-sm">
-                    <pillar.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <div className="space-y-2">
-                    <CardTitle className="text-2xl font-semibold group-hover:text-primary transition-colors duration-300">
-                      {pillar.title}
-                    </CardTitle>
-                    <p className="text-primary/80 font-medium text-sm uppercase tracking-wide">
-                      {pillar.subtitle}
-                    </p>
-                  </div>
-                  <p className="text-muted-foreground/80 text-base leading-relaxed mt-4">
-                    {pillar.description}
-                  </p>
-                </CardHeader>
-
-                <CardContent className="pt-0">
-                  {/* Features */}
-                  <ul className="space-y-3 mb-8">
-                    {pillar.features.map((feature: string, featureIndex: number) => (
-                      <li key={featureIndex} className="flex items-start text-sm">
-                        <CheckCircle className="w-5 h-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground leading-relaxed">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA */}
-                  <Button
-                    variant={pillar.popular ? "default" : "outline"}
-                    size="lg"
-                    className="w-full group/button shadow-sm hover:shadow-md transition-all duration-300"
-                    asChild
-                  >
-                    <Link href="/contact" className="flex items-center justify-center">
-                      Get Started with {pillar.title}
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover/button:translate-x-1 transition-transform duration-200" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
+        <div className="grid lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <ServiceCard key={index} service={service} index={index} />
           ))}
-        </StaggerChildren>
-
-        {/* Bottom CTA */}
-        <motion.div
-          className="text-center mt-16 lg:mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <p className="text-muted-foreground mb-6">
-            Need something custom? Let's discuss your unique project requirements.
-          </p>
-          <Button size="lg" className="min-w-[200px]" asChild>
-            <Link href="/contact">
-              Start Your Project
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+const ServiceCard = ({ service, index }: { service: typeof services[0], index: number }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <motion.div
+        className="bg-white rounded-3xl p-10 h-full cursor-pointer group"
+        whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
+      >
+        {/* Icon */}
+        <motion.div
+          className="text-6xl mb-8"
+          whileHover={{
+            rotate: [0, -10, 10, -10, 0],
+            transition: { duration: 0.5 }
+          }}
+        >
+          {service.icon}
+        </motion.div>
+
+        {/* Title */}
+        <h3 className="text-3xl font-semibold mb-4 tracking-tight">
+          {service.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-lg text-black/60 mb-8 leading-relaxed font-light">
+          {service.description}
+        </p>
+
+        {/* Features */}
+        <ul className="space-y-3 mb-8">
+          {service.features.map((feature, i) => (
+            <li key={i} className="flex items-center text-black/70 font-light">
+              <span className="w-1.5 h-1.5 rounded-full bg-black mr-3" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <motion.div
+          className="flex items-center text-black font-medium group-hover:gap-2 transition-all"
+          initial={{ gap: 0 }}
+        >
+          Learn more
+          <motion.span
+            animate={{ x: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            →
+          </motion.span>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export { ServiceCard, Services };
+

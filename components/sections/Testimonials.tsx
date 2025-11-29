@@ -95,17 +95,17 @@ export function Testimonials() {
       <div className="container mx-auto px-6 lg:px-20">
         {/* Header */}
         <motion.div
-          className="text-center mb-16 lg:mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-24"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <LineSweep />
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mt-6 mb-4">
+          <h2 className="text-6xl lg:text-7xl font-semibold tracking-tight mt-6 mb-6">
             Trusted by Visionaries
           </h2>
-          <p className="text-lg text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-black/60 max-w-2xl mx-auto leading-relaxed font-light">
             Join hundreds of satisfied clients who've transformed their spaces with our expertise.
           </p>
         </motion.div>
@@ -120,8 +120,8 @@ export function Testimonials() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Card className="border-0 shadow-xl bg-gradient-to-br from-card to-card/50">
-                <CardContent className="p-8 lg:p-10">
+              <Card className="border-0 shadow-xl bg-gradient-to-br from-card to-card/50 rounded-3xl">
+                <CardContent className="p-10">
                   <Quote className="w-10 h-10 text-primary/50 mb-6" />
 
                   <blockquote className="text-lg lg:text-xl leading-relaxed text-foreground mb-8">

@@ -107,22 +107,22 @@ export function ContactCTA({ onWaitlistClick }: { onWaitlistClick?: () => void }
       <div className="container mx-auto px-6 lg:px-20 relative">
         {/* Header */}
         <motion.div
-          className="text-center mb-16 lg:mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-24"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <LineSweep />
           <motion.h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight mt-6 mb-4"
+            className="text-6xl lg:text-7xl font-semibold tracking-tight mt-6 mb-6"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
             Let's Create Together
             <Sparkles className="inline-block w-8 h-8 ml-3 text-primary" />
           </motion.h2>
-          <p className="text-lg text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-black/60 max-w-2xl mx-auto leading-relaxed font-light">
             Ready to bring your vision to life? Let's discuss your project and explore how we can create something extraordinary together.
           </p>
         </motion.div>
@@ -136,8 +136,8 @@ export function ContactCTA({ onWaitlistClick }: { onWaitlistClick?: () => void }
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="border-0 shadow-xl bg-card/95 backdrop-blur-sm">
-              <CardContent className="p-8 lg:p-10">
+            <Card className="border-0 shadow-xl bg-card/95 backdrop-blur-sm rounded-3xl">
+              <CardContent className="p-10">
                 {!isSubmitted ? (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">

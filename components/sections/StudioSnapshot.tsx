@@ -67,21 +67,21 @@ const pressLogos = [
 
 export function StudioSnapshot() {
   return (
-    <section className="py-24 lg:py-32 bg-muted/30">
-      <div className="container mx-auto px-6 lg:px-20">
+    <section className="relative z-20 py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
-          className="text-center mb-16 lg:mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-24"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <LineSweep />
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mt-6 mb-4">
+          <h2 className="text-6xl lg:text-7xl font-semibold tracking-tight mt-6 mb-6">
             Award-Winning Studio
           </h2>
-          <p className="text-lg text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-black/60 max-w-2xl mx-auto leading-relaxed font-light">
             A collaborative team of visionary architects and designers bringing ideas to life through innovative design and sustainable practices.
           </p>
         </motion.div>
@@ -97,7 +97,7 @@ export function StudioSnapshot() {
           >
             {/* Studio Image */}
             <div className="relative">
-              <div className="aspect-[4/3] relative rounded-2xl overflow-hidden bg-muted">
+              <div className="aspect-[4/3] relative rounded-3xl overflow-hidden bg-muted">
                 <Image
                   src="/mockdata/renders/Photo_ModernHouse_Exterior.jpeg"
                   alt="Studio workspace"
@@ -173,25 +173,27 @@ export function StudioSnapshot() {
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
                     <Link href={`/team/${member.slug}`} className="block group">
-                      <Card className="border-0 shadow-sm bg-card/50 backdrop-blur-sm hover:bg-card/70 transition-colors cursor-pointer">
-                        <CardContent className="p-4">
-                          <div className="flex items-center space-x-4">
-                            <Avatar className="w-12 h-12">
-                              <AvatarImage
-                                src={member.image}
-                                alt={member.name}
-                                srcSet={`${member.imageAvif} 1x, ${member.imageWebp} 1x, ${member.image} 1x`}
-                              />
-                              <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex-1">
-                              <h4 className="font-semibold text-sm group-hover:text-primary transition-colors">{member.name}</h4>
-                              <p className="text-xs text-muted-foreground">{member.role}</p>
-                              <p className="text-xs text-primary font-medium">{member.credentials}</p>
+                      <motion.div whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}>
+                        <Card className="border-0 shadow-sm bg-white rounded-3xl">
+                          <CardContent className="p-8">
+                            <div className="flex items-center space-x-4">
+                              <Avatar className="w-12 h-12">
+                                <AvatarImage
+                                  src={member.image}
+                                  alt={member.name}
+                                  srcSet={`${member.imageAvif} 1x, ${member.imageWebp} 1x, ${member.image} 1x`}
+                                />
+                                <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                              </Avatar>
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-sm group-hover:text-primary transition-colors">{member.name}</h4>
+                                <p className="text-xs text-muted-foreground">{member.role}</p>
+                                <p className="text-xs text-primary font-medium">{member.credentials}</p>
+                              </div>
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
                     </Link>
                   </motion.div>
                 ))}
