@@ -43,7 +43,7 @@ const contactMethods = [
   }
 ];
 
-export function ContactCTA() {
+export function ContactCTA({ onWaitlistClick }: { onWaitlistClick?: () => void }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -294,7 +294,7 @@ export function ContactCTA() {
 
             {/* Magnetic CTA */}
             <motion.div
-              className="text-center"
+              className="text-center space-y-6"
               style={{ rotateX, rotateY }}
               onMouseMove={handleMouseMove}
               whileHover={{ scale: 1.02 }}
@@ -312,9 +312,32 @@ export function ContactCTA() {
                   </Link>
                 </Button>
               </motion.div>
-              <p className="text-sm text-muted-foreground mt-3">
+              <p className="text-sm text-muted-foreground">
                 See what we've built for others
               </p>
+
+              {onWaitlistClick && (
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block"
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="min-w-[200px] text-lg"
+                    onClick={onWaitlistClick}
+                  >
+                    Join Our Waitlist
+                    <Sparkles className="w-5 h-5 ml-2" />
+                  </Button>
+                </motion.div>
+              )}
+              {onWaitlistClick && (
+                <p className="text-sm text-muted-foreground">
+                  Be the first to know about new features
+                </p>
+              )}
             </motion.div>
           </motion.div>
         </div>

@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -90,6 +91,7 @@ export default function RootLayout({
         className={`${geistSans.className} antialiased`}
         suppressHydrationWarning
       >
+        <StructuredData type="organization" />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

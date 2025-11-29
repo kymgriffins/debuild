@@ -8,8 +8,10 @@ import { Hero } from "@/components/sections/Hero";
 import { Philosophy } from "@/components/sections/Philosophy";
 import { LineSweep } from "@/components/motion/LineSweep";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
 import { getAllProjects } from "@/lib/projects";
+import { WaitlistModal } from "@/components/WaitlistModal";
 
 import { Process } from "@/components/sections/Process";
 import { Services } from "@/components/sections/Services";
@@ -20,9 +22,14 @@ import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true);
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
 
   const handleLoaderComplete = () => {
     setShowLoader(false);
+  };
+
+  const handleWaitlistClick = () => {
+    setShowWaitlistModal(true);
   };
 
   useEffect(() => {
@@ -132,10 +139,16 @@ export default function Home() {
             {/* <Services /> */}
 
             <Testimonials />
-            <ContactCTA />
+            <ContactCTA onWaitlistClick={handleWaitlistClick} />
           </main>
 
           <Footer />
+
+          {/* Waitlist Modal */}
+          <WaitlistModal
+            isOpen={showWaitlistModal}
+            onClose={() => setShowWaitlistModal(false)}
+          />
         </div>
       )}
     </>

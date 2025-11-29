@@ -1,109 +1,263 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# Debuild Architecture - Crafting Spaces That Inspire
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+> Award-winning architectural design firm in Kenya specializing in residential, commercial, and sustainable building projects. Transform your vision into reality with Kenya's premier architects.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## 🌟 Vision & Mission
 
-## Features
+**Vision:** To be Kenya's leading architectural firm, creating spaces that inspire, endure, and contribute positively to communities and the environment.
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Proxy
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+**Mission:** Deliver exceptional architectural solutions through innovative design, sustainable practices, and unparalleled client service, building the future of Kenyan architecture one project at a time.
 
-## Demo
+## ✨ What This App Achieves
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+### 🏗️ Architecture Portfolio Platform
 
-## Deploy to Vercel
+- **Public Project Showcase:** Complete portfolio of architectural projects accessible without authentication
+- **Dynamic Project Gallery:** Filterable project listings with detailed case studies
+- **Interactive Project Pages:** Rich media presentations with project specifications, timelines, and key features
+- **Team Profiles:** Showcase architectural expertise and individual team member portfolios
+- **Service Offerings:** Comprehensive presentation of architectural services and capabilities
 
-Vercel deployment will guide you through creating a Supabase account and project.
+### 🚀 User Engagement & Growth
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+- **Waitlist System:** Email capture for early access to new features and exclusive insights
+- **Lead Generation:** Professional contact forms with validation and feedback
+- **SEO Optimization:** Full technical SEO implementation with structured data and sitemaps
+- **Performance Excellence:** Optimized for Core Web Vitals and accessibility standards
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+### 💼 Business Features
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+- **Professional Presentation:** Premium design conveying architectural expertise
+- **Mobile-First Experience:** Responsive design optimized for all devices
+- **Modern Tech Stack:** Built with Next.js 16, TypeScript, and cutting-edge web technologies
+- **Scalable Architecture:** Database-driven content management with Supabase
+- **Deployment Ready:** Production-configured with Vercel/Netlify integration
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+## 🎯 Core Objectives
 
-## Clone and run locally
+### 1. **Client Acquisition**
+- Showcase architectural expertise across residential, commercial, and cultural projects
+- Demonstrate sustainable design capabilities and innovation
+- Build trust through transparent project documentation and team profiles
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+### 2. **Lead Generation**
+- Professional contact forms with validation
+- Waitlist signup for ongoing engagement
+- Clear pricing and service information
+- Multiple conversion points throughout user journey
 
-2. Create a Next.js app using the Supabase Starter template npx command
+### 3. **Brand Authority**
+- Industry-leading SEO and performance metrics
+- Professional structured data and rich snippets
+- Social sharing optimization
+- Thought leadership content positioning
 
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
-   ```
+### 4. **User Experience Excellence**
+- Accessibility compliance (WCAG 2.1 AA)
+- Performance optimization (Core Web Vitals >90)
+- Intuitive navigation and information architecture
+- Mobile-first responsive design
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+## 🛠️ Technical Architecture
 
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
+### Frontend Stack
+- **Framework:** Next.js 16 with App Router
+- **Language:** TypeScript (strict mode)
+- **Styling:** Tailwind CSS 4.0 with custom design system
+- **Animations:** Framer Motion for smooth interactions
+- **UI Components:** Radix UI with custom shadcn/ui implementation
 
-3. Use `cd` to change into the app's directory
+### Backend Infrastructure
+- **Database:** Supabase (PostgreSQL)
+- **Authentication:** Supabase Auth (JWT-based)
+- **API:** RESTful endpoints with server actions
+- **Storage:** Supabase Storage for media assets
 
-   ```bash
-   cd with-supabase-app
-   ```
+### Performance & Compliance
+- **Bundle Optimization:** Turbopack with code splitting
+- **SEO:** Dynamic sitemaps, structured data, meta optimization
+- **Security:** Row-level security, input validation, HTTPS enforcement
+- **Accessibility:** ARIA labels, keyboard navigation, color contrast compliance
 
-4. Rename `.env.example` to `.env.local` and update the following:
+## 📁 Project Structure
 
-  ```env
-  NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[INSERT SUPABASE PROJECT API PUBLISHABLE OR ANON KEY]
-  ```
-  > [!NOTE]
-  > This example uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, which refers to Supabase's new **publishable** key format.
-  > Both legacy **anon** keys and new **publishable** keys can be used with this variable name during the transition period. Supabase's dashboard may show `NEXT_PUBLIC_SUPABASE_ANON_KEY`; its value can be used in this example.
-  > See the [full announcement](https://github.com/orgs/supabase/discussions/29260) for more information.
+```
+debuild/
+├── app/                     # Next.js App Router
+│   ├── api/                # API routes
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   ├── page.tsx            # Homepage
+│   └── [dynamic]/          # Dynamic routes
+├── components/             # Reusable components
+│   ├── ui/                # Base UI components
+│   ├── sections/          # Page sections
+│   ├── motion/            # Animation components
+│   └── layout/            # Layout components
+├── lib/                   # Utilities and configurations
+│   ├── projects.ts        # Project data management
+│   ├── teams.ts           # Team member management
+│   └── supabase/          # Database client
+├── public/                # Static assets
+│   ├── manifest.json      # PWA manifest
+│   └── mockdata/          # Project images and assets
+└── supabase/              # Database migrations and config
+```
 
-  Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
+## 🔑 Key Features Implemented
 
-5. You can now run the Next.js local development server:
+### ✅ SEO & Performance
+- [x] Dynamic sitemap.xml generation
+- [x] robots.txt optimization
+- [x] Structured data (Organization, Project schemas)
+- [x] Open Graph and Twitter card optimization
+- [x] Core Web Vitals optimization
+- [x] Accessibility compliance (WCAG 2.1 AA)
 
-   ```bash
-   npm run dev
-   ```
+### ✅ Content Management
+- [x] Static project data with rich media
+- [x] Team member profiles and expertise
+- [x] Service offerings and process documentation
+- [x] Blog-ready content architecture
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+### ✅ User Interaction
+- [x] Waitlist signup system with validation
+- [x] Contact forms with error handling
+- [x] Project filtering and search
+- [x] Smooth animations and transitions
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+### ✅ Business Systems
+- [x] Email capture and marketing automation
+- [x] Lead qualification and management
+- [x] Client communication workflows
+- [x] Performance analytics integration
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+## 🚀 Deployment & Production
 
-## Feedback and issues
+### Prerequisites
+```bash
+# Install dependencies
+npm install
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+# Set up environment variables
+cp .env.example .env.local
 
-## More Supabase examples
+# Configure Supabase
+# Create project at https://supabase.com
+# Update .env.local with your credentials
+```
 
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+### Environment Variables
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+VERCEL_URL=https://your-domain.vercel.app
+```
+
+### Build & Deploy
+```bash
+# Development
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start
+
+# Deploy to Vercel
+npm i -g vercel
+vercel --prod
+```
+
+### Database Setup
+```bash
+# Initialize Supabase in project
+supabase init
+
+# Run migrations
+supabase db push
+
+# Seed the database (if needed)
+supabase db reset
+```
+
+## 📊 Performance Metrics
+
+### Core Web Vitals Targets
+- **LCP (Largest Contentful Paint):** <2.5s
+- **FID (First Input Delay):** <100ms
+- **CLS (Cumulative Layout Shift):** <0.1
+
+### SEO Performance
+- **Lighthouse Performance:** >90
+- **Lighthouse Accessibility:** >95
+- **Lighthouse SEO:** >95
+
+### Business KPIs
+- **Conversion Rate:** Contact form submissions
+- **Waitlist Growth:** Email signups for features
+- **Project Inquiry:** Direct client contacts
+- **Portfolio Engagement:** Time on page, project views
+
+## 🔒 Security & Privacy
+
+### Data Protection
+- Row-level security on all database tables
+- Input validation and sanitization
+- HTTPS enforcement
+- GDPR-compliant data handling
+
+### Authentication
+- JWT-based secure sessions
+- Password hashing and salting
+- Protected admin routes
+- Session management
+
+## 📈 Future Enhancements
+
+### Phase 2 Roadmap
+- [ ] Admin dashboard for content management
+- [ ] Blog system for thought leadership
+- [ ] Project proposal system
+- [ ] Client portal for ongoing projects
+- [ ] Advanced analytics and reporting
+
+### Technical Improvements
+- [ ] Service worker for PWA features
+- [ ] Advanced caching strategies
+- [ ] Image optimization pipeline
+- [ ] CDN integration for global performance
+
+## 🤝 Contributing
+
+### Development Guidelines
+1. Follow TypeScript strict mode requirements
+2. Implement proper error boundaries
+3. Add loading states for all async operations
+4. Ensure mobile-first responsive design
+5. Write accessible, semantic HTML
+6. Follow established component patterns
+
+### Code Quality
+- ESLint configuration for consistency
+- Pre-commit hooks for quality checks
+- Automated testing for critical paths
+- Performance monitoring and metrics
+
+## 📄 License
+
+This project is proprietary software. All rights reserved.
+
+## 📞 Contact Information
+
+**Debuild Architecture**
+- Website: [debuild.co.ke](https://debuild.co.ke)
+- Email: hello@debuild.co.ke
+- Phone: +254 712 345 678
+- Location: Westlands, Nairobi, Kenya
+
+---
+
+**Built with ❤️ in Kenya, for the world of architecture.**
